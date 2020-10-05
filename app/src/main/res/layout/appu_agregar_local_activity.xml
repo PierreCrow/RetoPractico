@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivClose"
+            android:layout_width="50dp"
+            android:layout_height="35dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/botonback" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+
+            </LinearLayout>
+
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingTop="0dp">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp">
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp"
+                        android:nestedScrollingEnabled="false">
+
+                        <LinearLayout
+                            android:id="@+id/llInfoContainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="0dp"
+                            android:layout_marginRight="0dp"
+                            android:orientation="vertical"
+                            android:layout_marginBottom="20dp">
+
+
+                            <TextView
+                                android:id="@+id/tvTittle"
+                                android:layout_width="230dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginTop="5dp"
+                                android:fontFamily="@font/gothambold"
+                                android:text=""
+                                android:textColor="@color/labelColor"
+                                android:textSize="21dp"
+                                android:lineSpacingExtra="5dp"/>
+
+
+
+                            <com.google.android.gms.maps.MapView
+                                android:id="@+id/mapviewFreelancer"
+                                android:layout_marginTop="20dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="270dp">
+                            </com.google.android.gms.maps.MapView>
+
+
+                            <com.google.android.material.textfield.TextInputLayout
+
+                                android:id="@+id/tiEmail"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginRight="40dp"
+                                android:backgroundTint="@color/text_material_hint_edittext"
+                                android:theme="@style/Theme.App.Base"
+                                app:errorEnabled="true"
+                                app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etLocalName"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/gothambook"
+                                    android:hint="Nombre"
+                                    android:lines="1"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:textColor="@color/text_material_hint_edittext"
+                                    android:textSize="16sp"
+                                    />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginRight="40dp"
+                                android:backgroundTint="@color/text_material_hint_edittext"
+                                android:theme="@style/Theme.App.Base"
+                                app:errorEnabled="true"
+                                app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etLocalAdress"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/gothambook"
+                                    android:hint="Dirección"
+                                    android:lines="1"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:textColor="@color/text_material_hint_edittext"
+                                    android:textSize="16sp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginTop="30dp">
+
+
+                                <ImageView
+                                    android:id="@+id/ivContinue"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginLeft="55dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginRight="55dp"
+                                    android:layout_marginBottom="0dp"
+                                    android:background="@drawable/appu_shape_button_login"
+                                    android:textColor="@color/white"
+                                    android:textSize="16dp" />
+
+
+                                <TextView
+
+                                    android:id="@+id/titulo_recuperar"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:fontFamily="@font/gothambook"
+                                    android:text="Continuar"
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp" />
+
+                            </RelativeLayout>
+
+
+                        </LinearLayout>
+
+                    </ScrollView>
+
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

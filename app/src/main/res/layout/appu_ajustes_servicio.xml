@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/transparent"
+    android:orientation="vertical"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="0dp"
+        android:background="@android:color/transparent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:orientation="vertical"
+            android:paddingTop="15dp"
+            android:paddingBottom="0dp">
+
+            <LinearLayout
+                android:id="@+id/transparent_linear_filter"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:background="@android:color/transparent"
+                android:clickable="true"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="0dp"
+                android:background="@color/white"
+                android:orientation="vertical"
+                android:weightSum="10">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:id="@+id/ivClose"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/appu_ic_go_left" />
+
+                    <TextView
+                        android:layout_centerInParent="true"
+                        android:id="@+id/tvServiceName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/helveticaneu_bold"
+                        android:text=""
+                        android:textColor="@color/primaryLabelColor"
+                        android:textSize="20sp" />
+
+
+                </RelativeLayout>
+
+
+
+
+
+                <LinearLayout
+                    android:id="@+id/my_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="0dp"
+                    android:layout_weight="8"
+                    android:orientation="vertical">
+
+
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <RelativeLayout
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginBottom="3dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_centerInParent="true"
+                                    android:layout_alignParentLeft="true">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Elige los servicios que brindarás:"
+                                        android:layout_marginTop="10dp"
+                                        android:layout_marginLeft="20dp"
+                                        android:fontFamily="@font/gothambold"
+                                        android:textColor="@color/profile_options"
+                                        android:textSize="14sp"/>
+
+                                </LinearLayout>
+
+
+
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_centerInParent="true"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginRight="20dp">
+
+                                    <CheckBox
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:layout_marginLeft="20dp"
+                                        android:fontFamily="@font/gothammedium"
+                                        android:textSize="15sp"
+                                        android:visibility="invisible"/>
+
+
+
+
+
+                                </LinearLayout>
+
+
+
+
+
+                            </RelativeLayout>
+
+
+                            <RelativeLayout
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_marginTop="3dp"
+                                android:layout_marginBottom="3dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center">
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_centerInParent="true"
+                                    android:layout_alignParentLeft="true">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Seleccionar todo"
+                                        android:layout_marginTop="10dp"
+                                        android:layout_marginLeft="20dp"
+                                        android:fontFamily="@font/gothambold"
+                                        android:textColor="@color/profile_options"
+                                        android:textSize="14sp"/>
+
+                                </LinearLayout>
+
+
+
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_centerInParent="true"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginRight="20dp">
+
+                                    <CheckBox
+                                        android:id="@+id/chbEscogeTodo"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="10dp"
+                                        android:layout_marginLeft="20dp"
+                                        android:fontFamily="@font/gothammedium"
+                                        android:textSize="15sp"
+                                        android:buttonTint="@color/labelColor"
+                                        />
+
+
+
+
+
+                                </LinearLayout>
+
+
+
+
+
+                            </RelativeLayout>
+
+
+                           <androidx.recyclerview.widget.RecyclerView
+                               android:layout_width="match_parent"
+                               android:layout_height="wrap_content"
+                               android:id="@+id/rvSubServices">
+
+                           </androidx.recyclerview.widget.RecyclerView>
+
+
+
+
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="20dp"
+                                android:layout_marginTop="20dp">
+
+
+                                <ImageView
+                                    android:id="@+id/ivGuardar"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginLeft="40dp"
+                                    android:layout_marginTop="0dp"
+                                    android:layout_marginRight="40dp"
+                                    android:layout_marginBottom="0dp"
+                                    android:background="@drawable/appu_shape_button_login"
+                                    android:textColor="@color/white"
+                                    android:textSize="16dp" />
+
+
+                                <TextView
+
+                                    android:id="@+id/titulo_recuperar"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:fontFamily="@font/gothambook"
+                                    android:text="Guardar"
+                                    android:textColor="@color/white"
+                                    android:textSize="15sp" />
+
+                            </RelativeLayout>
+
+
+                        </LinearLayout>
+
+
+
+
+
+                    </ScrollView>
+
+
+
+
+                </LinearLayout>
+
+
+
+
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

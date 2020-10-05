@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="0dp"
+    android:layout_marginLeft="0dp"
+    android:layout_marginRight="0dp">
+
+
+    <RelativeLayout
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerInParent="true"
+            android:layout_alignParentLeft="true">
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:text="Tratamientos para el cuero capilar"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:fontFamily="@font/gothambold"
+                android:textColor="@color/profile_options"
+                android:textSize="14sp"
+                android:lineSpacingExtra="2dp"/>
+
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_centerInParent="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp">
+
+            <LinearLayout
+                android:background="@drawable/appu_shape_edittext_ajustes_servicio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="20dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gothammedium"
+                    android:textSize="14sp"
+                    android:text="S/"
+                    android:textColor="@color/labelColor"
+                    android:layout_marginLeft="5dp"/>
+
+                <EditText
+                    android:id="@+id/etPrice"
+                    android:layout_marginLeft="3dp"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gothammedium"
+                    android:textSize="14sp"
+                    android:background="@null"
+                    android:inputType="number"
+                    android:theme="@style/ThemeOverlay.MySwitch"
+                    android:textColor="@color/black"
+                    android:gravity="center"/>
+
+
+            </LinearLayout>
+
+
+
+            <CheckBox
+                android:id="@+id/chbCheck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/gothammedium"
+                android:textSize="15sp"
+                android:buttonTint="@color/labelColor"/>
+
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

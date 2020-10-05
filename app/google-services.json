@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "358013355858",
+    "firebase_url": "https://app-puntos-285220.firebaseio.com",
+    "project_id": "app-puntos-285220",
+    "storage_bucket": "app-puntos-285220.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358013355858:android:09fffa8441f7f7269f5c8b",
+        "android_client_info": {
+          "package_name": "com.appledroideirl.appunto"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358013355858-lpu8fnnf2eio408hf7bb07c4qi0cngng.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appledroideirl.appunto",
+            "certificate_hash": "c6e8747a8e1e66ccd203e1fdb7e3a849de56ffd5"
+          }
+        },
+        {
+          "client_id": "358013355858-m6g0eebae36haqvusbl86p51esii4030.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.appledroideirl.appunto",
+            "certificate_hash": "a6357a1b0e4fdac9552fc95ec196440ccf364df5"
+          }
+        },
+        {
+          "client_id": "358013355858-p9tlmlrnkqtig7erhipo553kt8f4kmi0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeAAC-tGdXZ3HP0Q9SIKWcu1FYfWsUCTI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358013355858-p9tlmlrnkqtig7erhipo553kt8f4kmi0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "358013355858-jdgs4iscr3hapu42ic7fspjqeurf24bl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.appledroideeirl.apppunto"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:358013355858:android:919eeb74277ea9539f5c8b",
+        "android_client_info": {
+          "package_name": "com.appledroideirl.appuntomarcafreelancer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "358013355858-p9tlmlrnkqtig7erhipo553kt8f4kmi0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeAAC-tGdXZ3HP0Q9SIKWcu1FYfWsUCTI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "358013355858-p9tlmlrnkqtig7erhipo553kt8f4kmi0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "358013355858-jdgs4iscr3hapu42ic7fspjqeurf24bl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.appledroideeirl.apppunto"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

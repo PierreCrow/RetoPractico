@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="orange">#c9ab6e</color>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+
+    <color name="googlemapsbutton">#F6F6F6</color>
+    <color name="wazebutton">#93C4D3</color>
+    <color name="facebookbutton">#0070BA</color>
+
+
+    <color name="button_buscador_filter">#F4F4F4</color>
+    <color name="tag_border">#9E9D9D</color>
+
+
+    <color name="filter_off">#F3F1F1</color>
+
+
+
+
+
+
+
+
+    <color name="background_details">#F8F7F7</color>
+
+</resources>

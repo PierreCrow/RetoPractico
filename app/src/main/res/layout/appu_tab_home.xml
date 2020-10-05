@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:weightSum="14"
+    android:background="@color/white">
+
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="13"
+        android:id="@+id/containerViewHome"
+        android:layout_marginBottom="1dp"
+        android:background="@color/white"
+        >
+
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </androidx.viewpager.widget.ViewPager>
+
+    </FrameLayout>
+
+
+
+
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+
+        >
+
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabsappunto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_tabbar_appunto"
+            app:tabIndicatorColor="@android:color/transparent">
+
+        </com.google.android.material.tabs.TabLayout>
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+</LinearLayout>

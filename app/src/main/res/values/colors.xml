@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">#11CFC5</color>
+    <color name="colorPrimaryDark">#06456F</color>
+    <color name="primaryLabelColor">#0070BA</color>
+    <color name="subtititlecolor">#6F6F6F</color>
+    <color name="lineperfil">#D5D2D2</color>
+    <color name="tabBarMenu">#F9F9F9</color>
+    <color name="register_labels">#474747</color>
+    <color name="semi_black">#302F2F</color>
+    <color name="register_lines">#666666</color>
+    <color name="interest_label_secconds">#787878</color>
+    <color name="success">#5CB85C</color>
+    <color name="semi_transparent">#750B0A0A</color>
+
+
+
+
+
+    <color name="labelColor">#336AA3</color>
+    <color name="splash_background">#E9F2F4</color>
+    <color name="brand_search">#f5f5f5</color>
+    <color name="profile_options">#323232</color>
+    <color name="button_item_estetica">#e9f2f4</color>
+    <color name="item_estetica_tittle">#333333</color>
+    <color name="item_freelancer_subtittle">#a99b9b</color>
+    <color name="rating">#ffb000</color>
+    <color name="text_login_user_pass">#cacaca</color>
+    <color name="text_login_subtittle">#919191</color>
+    <color name="text_material_hint_edittext">#aaa6a6</color>
+    <color name="subtitle_popups">#323232</color>
+    <color name="solicitud_pendiente">#DDB503</color>
+    <color name="solicitud_aprobado">#8DDD03</color>
+
+
+    <color name="item_servicios_freelancer">#5e5e5e</color>
+    <color name="tittle_home">#5e5e5e</color>
+    <color name="tittle_item_reportes">#323232</color>
+    <color name="item_disponibilidad_horas">#6e6e6e</color>
+
+    <color name="item_boton_denegar_pedido">#cfcfcf</color>
+
+
+
+
+
+</resources>

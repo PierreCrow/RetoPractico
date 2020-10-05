@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/AppLima.iml" filepath="$PROJECT_DIR$/AppLima.iml" group="AppLima" />
+      <module fileurl="file://$PROJECT_DIR$/AppuntoFreelancer.iml" filepath="$PROJECT_DIR$/AppuntoFreelancer.iml" group="AppuntoFreelancer" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="AppuntoFreelancer/app" />
+    </modules>
+  </component>
+</project>

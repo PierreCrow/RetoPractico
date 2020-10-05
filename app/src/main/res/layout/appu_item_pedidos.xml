@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:layout_marginTop="0dp"
+    android:layout_marginBottom="20dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp">
+
+
+
+    <LinearLayout
+        android:layout_gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="25dp">
+
+
+        <TextView
+            android:id="@+id/tvNameServicio"
+            android:layout_marginLeft="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Servicio"
+            android:fontFamily="@font/gothammedium"
+            android:textSize="16sp"
+            android:textColor="@color/tittle_item_reportes"/>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp">
+
+            <LinearLayout
+
+                android:layout_centerInParent="true"
+                android:layout_alignParentLeft="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/ivClientPicture"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tvSolitudClient"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content"
+                    android:text="Solicitado por Jose Torres"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/gothambook"
+                    android:paddingLeft="5dp"
+                    android:textSize="13sp"
+                    android:lineSpacingExtra="3dp"/>
+
+
+            </LinearLayout>
+
+
+
+            <ImageView
+                android:layout_centerInParent="true"
+                android:layout_alignParentRight="true"
+                android:id="@+id/ivBotonVer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/appu_go_down_black"/>
+
+
+
+        </RelativeLayout>
+
+
+
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="10dp"
+        android:visibility="gone"
+        android:id="@+id/llAEsconder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rvUserservicios">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/gothambold"
+                    android:lineSpacingExtra="5dp"
+                    android:text="Total"
+                    android:textColor="@color/item_servicios_freelancer"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tvTotal"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gothambold"
+                android:lineSpacingExtra="5dp"
+                android:text="S/160.00"
+                android:textColor="@color/item_servicios_freelancer"
+                android:textSize="14sp" />
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gothambold"
+                    android:lineSpacingExtra="5dp"
+                    android:text="Hora:"
+                    android:textColor="@color/item_servicios_freelancer"
+                    android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/tvHora"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gothambook"
+                    android:lineSpacingExtra="5dp"
+                    android:text="9:00 am"
+                    android:textColor="@color/item_servicios_freelancer"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gothambold"
+                    android:lineSpacingExtra="5dp"
+                    android:text="Fecha:"
+                    android:textColor="@color/item_servicios_freelancer"
+                    android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/tvFecha"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gothambook"
+                    android:lineSpacingExtra="5dp"
+                    android:text="17/07/2020"
+                    android:textColor="@color/item_servicios_freelancer"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gothambold"
+                    android:lineSpacingExtra="5dp"
+                    android:text="Lugar:"
+                    android:textColor="@color/item_servicios_freelancer"
+                    android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/tvLugar"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gothambook"
+                    android:lineSpacingExtra="5dp"
+                    android:text="San Miguel Av Pacifico 135 con entrada eb nla esquina del hotro lugar"
+                    android:textColor="@color/item_servicios_freelancer"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+
+
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/llBotones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp">
+
+            <Button
+                android:id="@+id/btnAceptar"
+                android:layout_margin="5dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:background="@drawable/appu_shape_boton_pedidos_blue"
+                android:text="Aprobar"
+                android:textAllCaps="false"
+                android:fontFamily="@font/gothambook"
+                android:textColor="@color/white"/>
+
+            <Button
+                android:id="@+id/btnDenegar"
+                android:layout_margin="5dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:background="@drawable/appu_shape_boton_pedidos_gray"
+                android:text="Denegar"
+                android:textAllCaps="false"
+                android:fontFamily="@font/gothambook"
+                android:textColor="@color/white"/>
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

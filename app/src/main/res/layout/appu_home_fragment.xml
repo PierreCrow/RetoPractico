@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="10dp">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="10"
+        android:background="@drawable/appu_header_home">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2.5"
+            android:orientation="vertical"
+
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tvUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:textColor="#FFFFFF"
+                android:textSize="18dp"
+                android:fontFamily="@font/gothambook"/>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="3dp"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bienvenido a "
+                    android:layout_marginLeft="30dp"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25dp"
+                    android:fontFamily="@font/gothammedium"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/appu_ic_logo_appunto_home"/>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="7.5"
+            android:orientation="vertical"
+            android:background="@drawable/appu_shape_home_appunto"
+            android:layout_marginTop="0dp"
+            android:paddingTop="10dp">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pedidos pendientes"
+                        android:layout_marginLeft="30dp"
+                        android:textColor="@color/tittle_home"
+                        android:textSize="18dp"
+                        android:fontFamily="@font/gothambold"
+                        android:layout_marginTop="20dp"/>
+
+
+
+
+                    <androidx.cardview.widget.CardView
+
+                        android:clickable="true"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="30dp"
+                        android:layout_height="100dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:orientation="horizontal"
+                        android:weightSum="11"
+                        android:gravity="center"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        app:cardCornerRadius="10dp"
+
+                       >
+
+                        <LinearLayout
+                            android:id="@+id/llPedidos"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:background="@drawable/appu_shape_home_box"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:background="@drawable/appu_ic_pedidos_pendientes"/>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="6">
+
+                                <TextView
+                                    android:id="@+id/tvTotalSolicitudesPendientes"
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content"
+                                    android:text=""
+                                    android:textColor="@color/tittle_home"
+                                    android:fontFamily="@font/gothambook"
+                                    android:paddingLeft="10dp"
+                                    android:lineSpacingExtra="3dp"/>
+
+                            </LinearLayout>
+
+
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:src="@drawable/appu_ic_go_rigth"/>
+
+
+
+                        </LinearLayout>
+
+
+
+                    </androidx.cardview.widget.CardView>
+
+
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tu disponibilidad"
+                        android:layout_marginLeft="30dp"
+                        android:textColor="@color/tittle_home"
+                        android:textSize="18dp"
+                        android:fontFamily="@font/gothambold"
+                        android:layout_marginTop="25dp"/>
+
+
+
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/llDisponibilidad"
+                        android:clickable="true"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="30dp"
+                        android:layout_height="100dp"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="30dp"
+                        android:orientation="horizontal"
+                        android:weightSum="11"
+                        android:gravity="center"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        app:cardCornerRadius="10dp"
+
+                        >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:background="@drawable/appu_shape_disponibilidad_home"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:background="@drawable/appu_ic_disponibilidad"/>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="6">
+
+
+                                <TextView
+                                    android:layout_marginLeft="20dp"
+                                    android:layout_width="150dp"
+                                    android:layout_height="wrap_content"
+                                    android:text="Configura tu disponibilidad"
+                                    android:textColor="@color/tittle_home"
+                                    android:fontFamily="@font/gothambook"
+                                    android:paddingLeft="10dp"
+                                    android:lineSpacingExtra="3dp"/>
+
+                            </LinearLayout>
+
+
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:src="@drawable/appu_ic_go_rigth_gray"/>
+
+
+
+                        </LinearLayout>
+
+
+
+                    </androidx.cardview.widget.CardView>
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginRight="30dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Servicios que brindas"
+                            android:textColor="@color/tittle_home"
+                            android:textSize="18dp"
+                            android:fontFamily="@font/gothambold" />
+
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:gravity="center">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:visibility="visible"
+                            android:id="@+id/rv_services"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="0dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="0dp"
+                            android:minHeight="310dp"/>
+
+
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:id="@+id/llservicio"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="140dp"
+                            android:background="@drawable/appu_shape_home_pink_home"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/appu_ic_estetica" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Estética"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14dp"
+                                android:fontFamily="@font/gothammedium"
+                                android:paddingTop="10dp"
+                                />
+
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_marginLeft="10dp"
+                            android:id="@+id/llagregarservicio"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="140dp"
+                            android:background="@drawable/appu_shape_shape_home_white"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/appu_ic_plus" />
+
+
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:visibility="invisible"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="140dp"
+                            android:layout_marginLeft="0dp">
+
+                            <androidx.cardview.widget.CardView
+
+                                android:visibility="visible"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                app:cardCornerRadius="20dp">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical"
+                                    android:background="@drawable/appu_shape_home_box"
+                                    android:gravity="center">
+
+
+                                </LinearLayout>
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/appu_ic_plus"
+                                    android:layout_gravity="center"/>
+
+
+                            </androidx.cardview.widget.CardView>
+
+
+
+                        </LinearLayout>
+
+
+
+
+
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </ScrollView>
+
+
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

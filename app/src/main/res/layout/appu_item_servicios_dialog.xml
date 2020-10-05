@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    android:id="@+id/cardService"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    app:cardCornerRadius="19dp"
+    app:cardUseCompatPadding="true"
+    android:layout_marginLeft="3dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginRight="3dp"
+    tools:ignore="MissingConstraints"
+    android:visibility="visible">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="5dp"
+        android:gravity="center">
+
+        <androidx.cardview.widget.CardView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:orientation="vertical"
+            app:cardCornerRadius="50dp"
+            app:cardUseCompatPadding="false"
+            android:layout_marginLeft="3dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="3dp"
+            tools:ignore="MissingConstraints"
+            android:visibility="visible">
+
+            <LinearLayout
+                android:id="@+id/llService"
+                android:layout_width="match_parent"
+                android:layout_height="75dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_gravity="center">
+
+                    <ImageView
+                        android:layout_centerInParent="true"
+                        android:id="@+id/ivIcon"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp" />
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <CheckBox
+            android:id="@+id/rbService"
+            android:layout_marginTop="0dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/profile_options"
+            android:textSize="12sp"
+            android:buttonTint="@color/labelColor"
+            />
+
+
+    </LinearLayout>
+
+</LinearLayout>

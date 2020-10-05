@@ -1,0 +1,55 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+        jcenter()
+    }
+    dependencies {
+
+        classpath 'com.android.tools.build:gradle:3.5.1'
+        classpath 'com.google.gms:google-services:4.3.2'
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
+        jcenter()
+
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+ext {
+    // App dependencies
+    supportLibraryVersion = '27.1.1'
+    flexboxVersion = '0.2.5'
+    rxJavaVersion = '2.0.1'
+    constraintLayoutVersion = '1.1.0'
+    roomVersion = '2.0.0-rc01'
+    calligraphyVersion = '2.2.0'
+    guavaVersion = '18.0'
+    daggerVersion = '2.11'
+    sugarVersion = '1.4'
+    glideVersion = '4.2.0'
+    recyclerViewVersion = '25.1.1'
+    superrecyclerViewVersion = '1.1.4'
+    butterKnifeVersion = '10.0.0'
+    retrofitVersion = '2.3.0'
+    converterGsonVersion = '2.0.0'
+    okhttpVersion = '3.6.0'
+    gsonVersion = '2.8.0'
+    junitVersion = '4.12'
+    espressoVersion = '2.2.2'
+}

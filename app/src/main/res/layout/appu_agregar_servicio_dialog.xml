@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:orientation="vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:background="@drawable/appu_shape_popups"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:gravity="right"
+                android:orientation="horizontal"
+                android:paddingLeft="0dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="5dp">
+
+
+
+
+
+                <ImageView
+                    android:id="@+id/ivClose"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/cancel"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/my_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="0dp"
+                android:layout_weight="10"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="230dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/gothambold"
+                    android:gravity="center"
+                    android:text="Agregar Servicio"
+                    android:textColor="@color/primaryLabelColor"
+                    android:textSize="19dp" />
+
+                <TextView
+                    android:id="@+id/titulo_estas_Seguro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/gothammedium"
+                    android:gravity="left"
+                    android:text="Selecciona una categoría:"
+                    android:textColor="@color/profile_options"
+                    android:textSize="16dp" />
+
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="0dp"
+                    android:gravity="center">
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_margin="5dp"
+                        android:gravity="center">
+
+                        <RelativeLayout
+                            android:layout_width="80dp"
+                            android:layout_height="80dp">
+
+                            <ImageView
+                                android:layout_centerInParent="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/appu_shape_home_skyblue" />
+
+                            <ImageView
+                                android:layout_centerInParent="true"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/appu_ic_spa" />
+
+
+
+
+                        </RelativeLayout>
+
+                        <RadioButton
+                            android:layout_marginTop="10dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Spa"
+                            android:textColor="@color/profile_options"
+                            android:textSize="13sp"
+                            android:buttonTint="@color/labelColor"
+                            />
+
+
+                    </LinearLayout>
+
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_margin="5dp"
+                        android:gravity="center">
+
+
+                        <RelativeLayout
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                         >
+
+                            <ImageView
+                                android:layout_centerInParent="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/appu_shape_home_purple" />
+
+                            <ImageView
+                                android:layout_centerInParent="true"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/appu_ic_manicure"/>
+
+
+
+
+                        </RelativeLayout>
+
+                        <RadioButton
+                            android:layout_marginTop="10dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Maquillaje"
+                            android:textSize="13sp"
+                            android:textColor="@color/profile_options"
+                            android:buttonTint="@color/labelColor"/>
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_margin="5dp"
+                        android:gravity="center">
+
+
+                        <RelativeLayout
+                            android:layout_width="80dp"
+                            android:layout_height="80dp">
+
+                            <ImageView
+                                android:layout_centerInParent="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/appu_shape_home_gray" />
+
+                            <ImageView
+                                android:layout_centerInParent="true"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/appu_ic_barber" />
+
+
+
+
+                        </RelativeLayout>
+
+                        <RadioButton
+                            android:layout_marginTop="10dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Barbería"
+                            android:textSize="13sp"
+                            android:textColor="@color/profile_options"
+                            android:buttonTint="@color/labelColor"/>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="0dp"
+                    android:gravity="center">
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_margin="5dp"
+                        android:gravity="center">
+
+
+                        <RelativeLayout
+                            android:layout_width="80dp"
+                            android:layout_height="80dp">
+
+                            <ImageView
+                                android:layout_centerInParent="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/appu_shape_home_orange" />
+
+                            <ImageView
+                                android:layout_centerInParent="true"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/appu_ic_tattoo" />
+
+
+
+
+                        </RelativeLayout>
+
+                        <RadioButton
+                            android:layout_marginTop="10dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tatto"
+                            android:textSize="13sp"
+                            android:textColor="@color/profile_options"
+                            android:buttonTint="@color/labelColor"/>
+
+
+                    </LinearLayout>
+
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_margin="5dp"
+                        android:gravity="center">
+
+
+                        <RelativeLayout
+                            android:layout_width="80dp"
+                            android:layout_height="80dp">
+
+                            <ImageView
+                                android:layout_centerInParent="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/appu_shape_home_pink" />
+
+                            <ImageView
+                                android:layout_centerInParent="true"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/appu_ic_estetica" />
+
+
+
+
+                        </RelativeLayout>
+
+                        <RadioButton
+                            android:layout_marginTop="10dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Estética"
+                            android:textSize="13sp"
+                            android:textColor="@color/profile_options"
+                            android:buttonTint="@color/labelColor"/>
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_margin="10dp"
+                        android:visibility="invisible">
+
+
+                        <RelativeLayout
+                            android:layout_width="80dp"
+                            android:layout_height="80dp">
+
+                            <ImageView
+                                android:layout_centerInParent="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/appu_shape_home_pink" />
+
+                            <ImageView
+                                android:layout_centerInParent="true"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:src="@drawable/appu_ic_estetica" />
+
+
+
+
+                        </RelativeLayout>
+
+                        <RadioButton
+                            android:layout_marginTop="10dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Estética"
+                            android:textColor="@color/profile_options"/>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_servicios_dialog"
+                    android:layout_width="match_parent"
+                    android:layout_height="270dp"
+                    android:visibility="visible"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="20dp"/>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="20dp">
+
+
+                    <ImageView
+                        android:id="@+id/ivContinue"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="50dp"
+                        android:layout_marginTop="0dp"
+                        android:layout_marginRight="50dp"
+                        android:layout_marginBottom="0dp"
+                        android:background="@drawable/appu_shape_button_login"
+                        android:textColor="@color/white"
+                        android:textSize="16dp" />
+
+
+                    <TextView
+
+                        android:id="@+id/titulo_recuperar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/gothambook"
+                        android:text="Agregar"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

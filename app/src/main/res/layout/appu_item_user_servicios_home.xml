@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    android:id="@+id/cardService"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="95dp"
+    android:layout_height="110dp"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    app:cardCornerRadius="19dp"
+    app:cardUseCompatPadding="true"
+    android:layout_marginLeft="3dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginRight="3dp"
+    tools:ignore="MissingConstraints"
+    android:visibility="visible">
+
+    <LinearLayout
+        android:id="@+id/llService"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <ImageView
+                android:layout_centerInParent="true"
+
+                android:id="@+id/ivIcon"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="15dp" />
+
+            <TextView
+                android:layout_centerInParent="true"
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                android:id="@+id/tvName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Estética"
+                android:textColor="#FFFFFF"
+                android:textSize="11dp"
+                android:fontFamily="@font/gothammedium"
+                android:layout_marginBottom="20dp"
+                />
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

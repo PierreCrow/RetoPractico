@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/ivClose"
+            android:layout_width="50dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/botonback" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="11.5">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.5">
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="10"
+                android:orientation="vertical"
+                android:paddingTop="0dp">
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp">
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="10dp">
+
+                        <LinearLayout
+                            android:id="@+id/llInfoContainer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="0dp"
+                            android:layout_marginRight="0dp"
+                            android:orientation="vertical"
+                            android:paddingLeft="15dp"
+                            android:paddingRight="15dp"
+                            android:layout_marginBottom="20dp">
+
+
+                            <TextView
+                                android:id="@+id/titulo_olvide"
+                                android:layout_width="250dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginTop="0dp"
+                                android:fontFamily="@font/gothambold"
+                                android:text="Completar los datos para continuar"
+                                android:textColor="@color/labelColor"
+                                android:textSize="25dp"
+                                android:lineSpacingExtra="5dp"/>
+
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginTop="40dp"
+                                android:layout_marginRight="40dp"
+                                android:weightSum="2">
+
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tiEmail"
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/text_material_hint_edittext"
+                                    android:theme="@style/Theme.App.Base"
+                                    app:errorEnabled="true"
+                                    app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+
+                                        android:id="@+id/etEmail"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/gothambook"
+                                        android:hint="Razón social"
+                                        android:lines="1"
+                                        android:maxLines="1"
+                                        android:singleLine="true"
+                                        android:textColor="@color/text_material_hint_edittext"
+                                        android:textSize="16sp"
+                                        />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:layout_width="0dp"
+                                    android:layout_weight="1"
+                                    android:layout_height="wrap_content"
+                                    android:backgroundTint="@color/text_material_hint_edittext"
+                                    android:theme="@style/Theme.App.Base"
+                                    app:errorEnabled="true"
+                                    app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/gothambook"
+                                        android:hint="RUC"
+                                        android:lines="1"
+                                        android:maxLines="1"
+                                        android:singleLine="true"
+                                        android:textColor="@color/text_material_hint_edittext"
+                                        android:textSize="16sp"
+                                        />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+
+                            </LinearLayout>
+
+
+
+                            <com.google.android.material.textfield.TextInputLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginRight="40dp"
+                                android:backgroundTint="@color/text_material_hint_edittext"
+                                android:theme="@style/Theme.App.Base"
+                                app:errorEnabled="true"
+                                app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/gothambook"
+                                    android:hint="Direccion de tu local principal"
+                                    android:lines="1"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:textColor="@color/text_material_hint_edittext"
+                                    android:textSize="16sp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <com.google.android.material.textfield.TextInputLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginRight="40dp"
+                                android:backgroundTint="@color/text_material_hint_edittext"
+                                android:theme="@style/Theme.App.Base"
+                                app:errorEnabled="true"
+                                app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/gothambook"
+                                    android:hint="Tu contraseña"
+                                    android:lines="1"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:textColor="@color/text_material_hint_edittext"
+                                    android:textSize="16sp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+                            <com.google.android.material.textfield.TextInputLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginTop="15dp"
+                                android:layout_marginRight="40dp"
+                                android:backgroundTint="@color/text_material_hint_edittext"
+                                android:theme="@style/Theme.App.Base"
+                                app:errorEnabled="true"
+                                app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/gothambook"
+                                    android:hint="Repite tu contraseña"
+                                    android:lines="1"
+                                    android:maxLines="1"
+                                    android:singleLine="true"
+                                    android:textColor="@color/text_material_hint_edittext"
+                                    android:textSize="16sp" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginLeft="40dp"
+                                android:text="Carga la foto de tu negocio"
+                                android:fontFamily="@font/gothambook"
+                                android:textColor="@color/text_material_hint_edittext"/>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginLeft="40dp"
+                                android:layout_marginTop="20dp"
+                                android:gravity="center_vertical">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/appu_ic_picture"/>
+
+                                <TextView
+                                    android:layout_marginLeft="15dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Subir mi foto"
+                                    android:fontFamily="@font/gothammedium"
+                                    android:textColor="@color/labelColor"
+                                    android:textSize="17dp"/>
+
+                            </LinearLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginTop="30dp">
+
+
+                                <ImageView
+                                    android:id="@+id/ivContinue"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:layout_centerInParent="true"
+                                    android:layout_marginLeft="40dp"
+                                    android:layout_marginTop="10dp"
+                                    android:layout_marginRight="40dp"
+                                    android:layout_marginBottom="0dp"
+                                    android:background="@drawable/appu_shape_button_login"
+                                    android:textColor="@color/white"
+                                    android:textSize="16dp" />
+
+
+                                <TextView
+
+                                    android:id="@+id/titulo_recuperar"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerInParent="true"
+                                    android:fontFamily="@font/gothambook"
+                                    android:text="Solicitar Registro"
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp" />
+
+                            </RelativeLayout>
+
+
+                        </LinearLayout>
+
+                    </ScrollView>
+
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>
