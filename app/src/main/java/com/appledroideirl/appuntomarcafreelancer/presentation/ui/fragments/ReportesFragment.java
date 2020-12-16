@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -46,7 +47,7 @@ public class ReportesFragment extends BaseFragment
     ReportesListDataAdapter adapter;
     ReportesListDataAdapter.OnReportesListDataAdapterClickListener mlistener;
 
-    List<Reporte> reportes;
+    public static List<Reporte> reportes;
 
     UserPresenter userPresenter;
 
@@ -59,7 +60,14 @@ public class ReportesFragment extends BaseFragment
         View x = inflater.inflate(R.layout.appu_reportes_fragment, null);
         injectView(x);
         initUI();
-        loadPresenter();
+        if(Helper.isConnectedToInternet(getContext()))
+        {
+            loadPresenter();
+        }
+        else
+        {
+           // Toast.makeText(getContext(), "No tienes Internet", Toast.LENGTH_LONG).show();
+        }
 
         return x;
     }
@@ -197,6 +205,11 @@ public class ReportesFragment extends BaseFragment
     }
 
     @Override
+    public void deleteLocalSuccess(String mensaje) {
+
+    }
+
+    @Override
     public void showLoading() {
 
     }
@@ -208,6 +221,6 @@ public class ReportesFragment extends BaseFragment
 
     @Override
     public void showErrorMessage(String message) {
-
+        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
 }

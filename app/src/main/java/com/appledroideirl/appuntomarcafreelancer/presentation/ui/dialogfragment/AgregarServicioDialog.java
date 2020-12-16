@@ -112,7 +112,14 @@ public class AgregarServicioDialog extends DialogFragment
         ivContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showAlert();
+                if(Helper.isConnectedToInternet(getContext()))
+                {
+                    showAlert();
+                }
+                else
+                {
+                    Toast.makeText(getContext(), "No tienes Internet", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -286,6 +293,11 @@ public class AgregarServicioDialog extends DialogFragment
 
     @Override
     public void recoveryPasswordSuccess(String mensaje) {
+
+    }
+
+    @Override
+    public void deleteLocalSuccess(String mensaje) {
 
     }
 

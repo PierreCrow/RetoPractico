@@ -26,7 +26,7 @@
         android:allowBackup="false"
         tools:replace="android:allowBackup"
         android:hardwareAccelerated="true"
-        android:icon="@mipmap/logo_appunto"
+        android:icon="@mipmap/avataro"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:theme="@style/AppTheme">

@@ -84,7 +84,9 @@ public class ProfileFreelancerFragment extends BaseFragment {
 
         Helper.urlToImageView(Helper.getUserAppPreference(getContext()).getPhoto(), ivUserImage, getContext());
         tvName.setText(Helper.getUserAppPreference(getContext()).getFull_name());
-        tvRate.setText(Helper.getUserAppPreference(getContext()).getAvg_rate().toString());
+        Double rateee=Helper.getUserAppPreference(getContext()).getAvg_rate();
+        String califf=Helper.convertTwoDecimals(rateee);
+        tvRate.setText(califf);
 
         onClickListener();
         llMiCuentaBancaria.setOnClickListener(singleClick);

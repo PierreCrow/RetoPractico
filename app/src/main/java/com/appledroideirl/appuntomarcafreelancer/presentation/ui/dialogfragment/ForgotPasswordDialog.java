@@ -225,6 +225,11 @@ public class ForgotPasswordDialog extends DialogFragment implements UserView {
     }
 
     @Override
+    public void deleteLocalSuccess(String mensaje) {
+
+    }
+
+    @Override
     public void showLoading() {
 
     }

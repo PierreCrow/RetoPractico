@@ -1,0 +1,24 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/page_1"
+        android:enabled="true"
+        android:icon="@drawable/appu_ic_home_on"
+        android:title="Inicio" />
+    <item
+        android:id="@+id/page_2"
+        android:enabled="true"
+        android:icon="@drawable/appu_ic_pedidos_on"
+        android:title="Pedidos"/>
+    <item
+        android:id="@+id/page_3"
+        android:enabled="true"
+        android:icon="@drawable/appu_ic_reportes_on"
+        android:title="Reportes"/>
+    <item
+        android:id="@+id/page_4"
+        android:enabled="true"
+        android:icon="@drawable/appu_ic_perfil_appunto_on"
+        android:title="Perfil"/>
+</menu>
+

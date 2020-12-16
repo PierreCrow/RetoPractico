@@ -3,11 +3,16 @@ package com.appledroideirl.appuntomarcafreelancer.presentation.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.widget.ImageView;
 
 import com.appledroideirl.appuntomarcafreelancer.domain.model.Usuario;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class Helper {
 
@@ -71,6 +76,36 @@ public class Helper {
                 //.override(100, 200)
                 .fitCenter()
                 .into(imagev);
+    }
+
+    public static boolean isConnectedToInternet(Context context) {
+        ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        Boolean conectado = null;
+        if (connectivity != null) {
+            NetworkInfo activeNetwork = connectivity.getActiveNetworkInfo();
+            if (activeNetwork != null && activeNetwork.isConnectedOrConnecting())
+                conectado = true;
+            else {
+                conectado = false;
+            }
+        } else {
+            conectado = false;
+        }
+        return conectado;
+    }
+
+    public static String convertTwoDecimals(float number) {
+        BigDecimal bd = new BigDecimal(number);
+        bd = bd.setScale(1, RoundingMode.HALF_UP);
+        String converted = Double.toString(bd.doubleValue());
+        return converted;
+    }
+
+    public static String convertTwoDecimals(Double number) {
+        BigDecimal bd = new BigDecimal(number);
+        bd = bd.setScale(2, RoundingMode.HALF_UP);
+        String converted = Double.toString(bd.doubleValue());
+        return converted;
     }
 
 

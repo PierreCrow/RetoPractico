@@ -186,6 +186,11 @@ public class CuentanosEresActivity extends BaseActivity implements UserView {
     }
 
     @Override
+    public void deleteLocalSuccess(String mensaje) {
+
+    }
+
+    @Override
     public void showLoading() {
 
     }

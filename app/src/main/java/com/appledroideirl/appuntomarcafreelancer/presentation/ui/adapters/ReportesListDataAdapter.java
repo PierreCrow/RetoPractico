@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.appledroideirl.appuntomarcafreelancer.R;
 import com.appledroideirl.appuntomarcafreelancer.domain.model.Reporte;
+import com.appledroideirl.appuntomarcafreelancer.presentation.utils.Helper;
 
 import java.util.List;
 
@@ -46,9 +47,11 @@ public class ReportesListDataAdapter extends RecyclerView.Adapter<ReportesListDa
         String titulo=reporte.getTittle();
         holder.tvTittle.setText(titulo);
 
+        String montooo= Helper.convertTwoDecimals(reporte.getValue());
+
         if(titulo.equals("Ingresos"))
         {
-            holder.tvSubTittle.setText("Este mes has ganado S/"+reporte.getValue().toString());
+            holder.tvSubTittle.setText("Este mes has ganado S/"+montooo);
             holder.ivReporte.setImageResource(R.drawable.appu_ic_ingresos);
         }
 

@@ -32,6 +32,7 @@ import com.appledroideirl.appuntomarcafreelancer.interactor.usuario.AddLocalCall
 import com.appledroideirl.appuntomarcafreelancer.interactor.usuario.AddServiceCallback;
 import com.appledroideirl.appuntomarcafreelancer.interactor.usuario.AddSubServiceCallback;
 import com.appledroideirl.appuntomarcafreelancer.interactor.usuario.AddUserCallback;
+import com.appledroideirl.appuntomarcafreelancer.interactor.usuario.DeleteLocalCallback;
 import com.appledroideirl.appuntomarcafreelancer.interactor.usuario.EditUserCallback;
 import com.appledroideirl.appuntomarcafreelancer.interactor.usuario.GenerateTokenCallback;
 import com.appledroideirl.appuntomarcafreelancer.interactor.usuario.ListAvailableDateHourCallback;
@@ -55,7 +56,7 @@ public class UserPresenter implements Presenter<UserView>, GenerateTokenCallback
         ListServicesCallback, ListUserServicesCallback, AddServiceCallback,
         AddDateAvailableCallback, AddUserCallback, ListBankAccountCallback,
         AddBankAccountCallback, AddSubServiceCallback, EditUserCallback,
-        ListLocalesCallback, RecoveryPasswordCallback, AddLocalCallback {
+        ListLocalesCallback, RecoveryPasswordCallback, AddLocalCallback,DeleteLocalCallback {
 
     private UserView userView;
     private UserInteractor userInteractor;
@@ -135,6 +136,11 @@ public class UserPresenter implements Presenter<UserView>, GenerateTokenCallback
     public void recoveryPassword(String token, WsParameterRecoveryPassword wsParameterRecoveryPassword) {
         userInteractor.recoveryPassword(token, wsParameterRecoveryPassword, this);
     }
+
+    public void deleteLocal(String token, int idLocal) {
+        userInteractor.deleteLocal(token, idLocal, this);
+    }
+
 
     @Override
     public void addView(UserView view) {
@@ -334,6 +340,16 @@ public class UserPresenter implements Presenter<UserView>, GenerateTokenCallback
 
     @Override
     public void onRecoveryPasswordError(String message) {
+        userView.showErrorMessage(message);
+    }
+
+    @Override
+    public void onDeleteLocalSuccess(String message) {
+        userView.deleteLocalSuccess(message);
+    }
+
+    @Override
+    public void onDeleteLocalError(String message) {
         userView.showErrorMessage(message);
     }
 }

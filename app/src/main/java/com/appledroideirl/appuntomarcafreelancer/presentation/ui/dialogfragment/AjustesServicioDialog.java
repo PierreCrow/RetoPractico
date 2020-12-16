@@ -57,7 +57,7 @@ public class AjustesServicioDialog extends DialogFragment
     LinearLayout transparent_linear_filter;
     TextView tvServiceName;
     RecyclerView rvSubServices;
-    CheckBox chbEscogeTodo;
+    public static CheckBox chbEscogeTodo;
 
     EscogeSubServicioListDataAdapter.OnEscogeSubServicioListDataAdapterClickListener mlistener;
     EscogeSubServicioListDataAdapter adapter;
@@ -69,6 +69,9 @@ public class AjustesServicioDialog extends DialogFragment
 
     UserPresenter userPresenter;
     TransparentProgressDialog loading;
+
+    public static boolean fromAdapter;
+    public static int positionAdapter;
 
 
     @Override
@@ -114,26 +117,37 @@ public class AjustesServicioDialog extends DialogFragment
             @Override
             public void onClick(View view) {
 
-                if (!loading.isShowing()) {
-                    loading.show();
-                }
-
-
-                boolean esCorrecto = true;
-
-                for (WsParameterAddSubService wsParameterAddSubService : subServicesToAdd) {
-                    if (wsParameterAddSubService.getEnable() == 1 && wsParameterAddSubService.getCharge() == 0.0) {
-                        esCorrecto = false;
+                if(Helper.isConnectedToInternet(getContext()))
+                {
+                    if (!loading.isShowing()) {
+                        loading.show();
                     }
-                }
-                if (esCorrecto) {
-                    userPresenter.addSubService(Helper.getUserAppPreference(getContext()).getToken(), subServicesToAdd);
-                } else {
-                    if (loading.isShowing()) {
-                        loading.dismiss();
+
+
+                    boolean esCorrecto = true;
+
+                    for (WsParameterAddSubService wsParameterAddSubService : subServicesToAdd) {
+                        if (wsParameterAddSubService.getEnable() == 1 && wsParameterAddSubService.getCharge() == 0.0) {
+                            esCorrecto = false;
+                        }
                     }
-                    Toast.makeText(getContext(), "Hay servicios habilitados sin precio", Toast.LENGTH_SHORT).show();
+
+
+                    if (esCorrecto) {
+                        userPresenter.addSubService(Helper.getUserAppPreference(getContext()).getToken(), subServicesToAdd);
+                    } else {
+                        if (loading.isShowing()) {
+                            loading.dismiss();
+                        }
+                        Toast.makeText(getContext(), "Hay servicios habilitados sin precio", Toast.LENGTH_SHORT).show();
+                    }
+
                 }
+                else
+                {
+                    Toast.makeText(getContext(), "No tienes Internet", Toast.LENGTH_LONG).show();
+                }
+
 
 
             }
@@ -156,23 +170,94 @@ public class AjustesServicioDialog extends DialogFragment
             }
         });
 
+        fromAdapter = false;
+
         chbEscogeTodo.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    for (SubService subService : subServiciosTodosCheck) {
-                        subService.setEnable(1);
+                    if (fromAdapter) {
+                        subServiciosTodosCheck.get(positionAdapter).setEnable(1);
+
+                        for (SubService subService : subServiciosTodosCheck) {
+                            for (WsParameterAddSubService wsParameterAddSubService : subServicesToAdd) {
+                                if (wsParameterAddSubService.getId_sub_service() == subService.getId()) {
+                                    wsParameterAddSubService.setEnable(subService.getEnable());
+                                    subService.setCharge(wsParameterAddSubService.getCharge().toString());
+                                }
+                            }
+                        }
+
+                        adapter = new EscogeSubServicioListDataAdapter(mlistener, getContext(), subServiciosTodosCheck);
+                        rvSubServices.setHasFixedSize(true);
+                        rvSubServices.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                        rvSubServices.setAdapter(adapter);
+
+                        fromAdapter = false;
+
+
+
+
+                    } else {
+                        for (SubService subService : subServiciosTodosCheck) {
+                            subService.setEnable(1);
+                        }
+
+                        adapter = new EscogeSubServicioListDataAdapter(mlistener, getContext(), subServiciosTodosCheck);
+                        rvSubServices.setHasFixedSize(true);
+                        rvSubServices.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                        rvSubServices.setAdapter(adapter);
+
+                        for (SubService subService : subServiciosTodosCheck) {
+                            for (WsParameterAddSubService wsParameterAddSubService : subServicesToAdd) {
+                                if (wsParameterAddSubService.getId_sub_service() == subService.getId()) {
+                                    wsParameterAddSubService.setEnable(subService.getEnable());
+                                }
+                            }
+                        }
                     }
-                    adapter = new EscogeSubServicioListDataAdapter(mlistener, getContext(), subServiciosTodosCheck);
-                    rvSubServices.setHasFixedSize(true);
-                    rvSubServices.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-                    rvSubServices.setAdapter(adapter);
 
                 } else {
-                    adapter = new EscogeSubServicioListDataAdapter(mlistener, getContext(), HomeFragment.serviceSelected.getSubServices());
-                    rvSubServices.setHasFixedSize(true);
-                    rvSubServices.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-                    rvSubServices.setAdapter(adapter);
+
+                    if (fromAdapter) {
+                        subServiciosTodosCheck.get(positionAdapter).setEnable(0);
+
+                        adapter = new EscogeSubServicioListDataAdapter(mlistener, getContext(), subServiciosTodosCheck);
+                        rvSubServices.setHasFixedSize(true);
+                        rvSubServices.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                        rvSubServices.setAdapter(adapter);
+
+                        fromAdapter = false;
+
+                        for (SubService subService : subServiciosTodosCheck) {
+                            for (WsParameterAddSubService wsParameterAddSubService : subServicesToAdd) {
+                                if (wsParameterAddSubService.getId_sub_service() == subService.getId()) {
+                                    wsParameterAddSubService.setEnable(subService.getEnable());
+                                }
+                            }
+                        }
+
+
+                    } else {
+                        for (SubService subService : subServiciosTodosCheck) {
+                            subService.setEnable(0);
+                        }
+
+                        adapter = new EscogeSubServicioListDataAdapter(mlistener, getContext(), subServiciosTodosCheck);
+                        rvSubServices.setHasFixedSize(true);
+                        rvSubServices.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                        rvSubServices.setAdapter(adapter);
+
+                        for (SubService subService : subServiciosTodosCheck) {
+                            for (WsParameterAddSubService wsParameterAddSubService : subServicesToAdd) {
+                                if (wsParameterAddSubService.getId_sub_service() == subService.getId()) {
+                                    wsParameterAddSubService.setEnable(subService.getEnable());
+                                }
+                            }
+                        }
+                    }
+
+
                 }
 
 
@@ -326,6 +411,11 @@ public class AjustesServicioDialog extends DialogFragment
 
     @Override
     public void recoveryPasswordSuccess(String mensaje) {
+
+    }
+
+    @Override
+    public void deleteLocalSuccess(String mensaje) {
 
     }
 

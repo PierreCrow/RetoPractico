@@ -109,6 +109,11 @@ public class DbUsuarioDataStore implements UsuarioDataStore {
     }
 
     @Override
+    public void deleteLocal(String token, int idLocal, RepositoryCallback repositoryCallback) {
+
+    }
+
+    @Override
     public void addLocal(String token, WsParameterAgregarLocal wsParameterAgregarLocal, RepositoryCallback repositoryCallback) {
 
     }

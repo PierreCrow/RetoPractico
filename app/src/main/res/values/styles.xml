@@ -114,4 +114,15 @@
     </style>
 
 
+
+    <style name="AppTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/menu_inactivo</item>
+        <item name="textAllCaps">false</item>
+
+        <item name="android:layout_marginBottom">0sp</item>
+        <item name="android:gravity">top</item>
+    </style>
+
+
 </resources>

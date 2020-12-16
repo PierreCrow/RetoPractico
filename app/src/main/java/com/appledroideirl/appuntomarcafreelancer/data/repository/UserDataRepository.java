@@ -33,6 +33,7 @@ import com.appledroideirl.appuntomarcafreelancer.interactor.usuario.AddLocalCall
 import com.appledroideirl.appuntomarcafreelancer.interactor.usuario.AddServiceCallback;
 import com.appledroideirl.appuntomarcafreelancer.interactor.usuario.AddSubServiceCallback;
 import com.appledroideirl.appuntomarcafreelancer.interactor.usuario.AddUserCallback;
+import com.appledroideirl.appuntomarcafreelancer.interactor.usuario.DeleteLocalCallback;
 import com.appledroideirl.appuntomarcafreelancer.interactor.usuario.EditUserCallback;
 import com.appledroideirl.appuntomarcafreelancer.interactor.usuario.GenerateTokenCallback;
 import com.appledroideirl.appuntomarcafreelancer.interactor.usuario.ListAvailableDateHourCallback;
@@ -465,5 +466,27 @@ public class UserDataRepository implements UserRepository {
             }
         });
 
+    }
+
+    @Override
+    public void deleteLocal(String token, int idLocal, DeleteLocalCallback deleteLocalCallback) {
+
+        final UsuarioDataStore usuarioDataStore = userDataStoreFactory.create(Constants.STORE.CLOUD);
+        usuarioDataStore.deleteLocal(token, idLocal, new RepositoryCallback() {
+            @Override
+            public void onError(Object object) {
+                String message = "";
+                if (object != null) {
+                    message = object.toString();
+                }
+                deleteLocalCallback.onDeleteLocalError(message);
+            }
+
+            @Override
+            public void onSuccess(Object object) {
+                String mensaje = (String) object;
+                deleteLocalCallback.onDeleteLocalSuccess(mensaje);
+            }
+        });
     }
 }

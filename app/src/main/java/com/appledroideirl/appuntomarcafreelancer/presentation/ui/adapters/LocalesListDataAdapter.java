@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,7 +29,7 @@ public class LocalesListDataAdapter extends RecyclerView.Adapter<LocalesListData
     }
 
     public interface OnLocalesListDataAdapterClickListener {
-        void onLocalesListDataAdapterClicked(View v, Integer position);
+        void onLocalesListDataAdapterClicked(View v, Integer position,boolean eliminar);
     }
 
     @Override
@@ -57,6 +58,7 @@ public class LocalesListDataAdapter extends RecyclerView.Adapter<LocalesListData
     public class SingleItemRowHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         protected TextView   tvnameLocal,tvadressLocal;
+        protected LinearLayout llLocal,llEliminar;
 
         public SingleItemRowHolder(View view) {
             super(view);
@@ -64,12 +66,24 @@ public class LocalesListDataAdapter extends RecyclerView.Adapter<LocalesListData
             this.tvnameLocal = (TextView) view.findViewById(R.id.tvnameLocal);
             this.tvadressLocal = (TextView) view.findViewById(R.id.tvadressLocal);
 
-            view.setOnClickListener(this);
+            this.llLocal = (LinearLayout) view.findViewById(R.id.llLocal);
+            this.llEliminar = (LinearLayout) view.findViewById(R.id.llEliminar);
+
+            llLocal.setOnClickListener(this);
+            llEliminar.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            mlistener.onLocalesListDataAdapterClicked(view, this.getPosition());
+
+            boolean eliminar=false;
+
+            if(view==llEliminar)
+            {
+                eliminar=true;
+            }
+
+            mlistener.onLocalesListDataAdapterClicked(view, this.getPosition(),eliminar);
         }
     }
 

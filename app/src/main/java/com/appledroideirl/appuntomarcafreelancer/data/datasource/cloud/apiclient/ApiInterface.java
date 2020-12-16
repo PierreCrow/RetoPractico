@@ -20,6 +20,7 @@ import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.use
 import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.user.response.WsResponseAgregarServicio;
 import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.user.response.WsResponseAgregarUsuario;
 import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.user.response.WsResponseAvailableDateHour;
+import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.user.response.WsResponseDeleteLocal;
 import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.user.response.WsResponseEditarUsuario;
 import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.user.response.WsResponseListBankAccount;
 import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.user.response.WsResponseListLocales;
@@ -35,6 +36,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -86,6 +88,8 @@ public interface ApiInterface {
     @GET
     Call<WsResponseListBankAccount> listBankAccount(@Url String url);
 
+
+
     @POST(Constants.URLS.ADD_SUB_SERVICE)
     Call<WsResponseAddSubService> addSubService(@Body List<WsParameterAddSubService> wsParameterAddSubServices);
 
@@ -97,6 +101,9 @@ public interface ApiInterface {
 
     @POST(Constants.URLS.ADD_LOCAL)
     Call<WsResponseAgregarLocal> addLocal(@Body WsParameterAgregarLocal wsParameterAgregarLocal);
+
+    @DELETE
+    Call<WsResponseDeleteLocal> deleteLocal(@Url String url);
 
     @POST(Constants.URLS.RECOVERY_PASSWORD)
     Call<WsResponseRecoveryPassword> recoveryPassword(@Body WsParameterRecoveryPassword wsParameterRecoveryPassword);

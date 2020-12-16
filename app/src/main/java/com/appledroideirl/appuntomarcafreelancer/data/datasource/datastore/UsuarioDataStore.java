@@ -49,6 +49,8 @@ public interface UsuarioDataStore {
 
     void listLocales(String token, int idUser, RepositoryCallback repositoryCallback);
 
+    void deleteLocal(String token, int idLocal, RepositoryCallback repositoryCallback);
+
     void addLocal(String token, WsParameterAgregarLocal wsParameterAgregarLocal, RepositoryCallback repositoryCallback);
 
     void recoveryPassword(String token, WsParameterRecoveryPassword wsParameterRecoveryPassword, RepositoryCallback repositoryCallback);

@@ -85,7 +85,15 @@ public class PedidosActivity extends BaseActivity
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         injectView();
         initUi();
-        loadPresenter();
+
+        if(Helper.isConnectedToInternet(getContext()))
+        {
+            loadPresenter();
+        }
+        else
+        {
+            Toast.makeText(getContext(), "No tienes Internet", Toast.LENGTH_LONG).show();
+        }
     }
 
     void loadPresenter() {
@@ -202,11 +210,12 @@ public class PedidosActivity extends BaseActivity
 
 
     @Override
-    public void onPedidosListDataAdapterClicked(View v, Integer position, String action) {
+    public void onPedidosListDataAdapterClicked(View v, Integer position, String action,WsDataRequest wsDataRequest) {
 
-        Integer idRequest = requests.get(position).getId();
-        String solicitado = requests.get(position).getFull_name_customer();
-        String fecha = requests.get(position).getDate_availability();
+
+        Integer idRequest = wsDataRequest.getId();
+        String solicitado = wsDataRequest.getFull_name_customer();
+        String fecha = wsDataRequest.getDate_availability();
 
         showAlert(idRequest, solicitado, fecha, action);
 
@@ -332,6 +341,11 @@ public class PedidosActivity extends BaseActivity
     }
 
     @Override
+    public void deleteLocalSuccess(String mensaje) {
+
+    }
+
+    @Override
     public void showLoading() {
 
     }
@@ -343,7 +357,10 @@ public class PedidosActivity extends BaseActivity
 
     @Override
     public void showErrorMessage(String message) {
-
+        if (loading.isShowing()) {
+            loading.dismiss();
+        }
+        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
 
     @Override

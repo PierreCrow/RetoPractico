@@ -167,6 +167,11 @@ public class Splash extends BaseActivity implements UserView {
     }
 
     @Override
+    public void deleteLocalSuccess(String mensaje) {
+
+    }
+
+    @Override
     public void showLoading() {
 
     }

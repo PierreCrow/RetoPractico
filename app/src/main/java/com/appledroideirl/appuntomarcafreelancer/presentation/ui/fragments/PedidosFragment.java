@@ -70,7 +70,7 @@ public class PedidosFragment extends BaseFragment
 
     List<Pedido> pedidosAprobados;
 
-    List<WsDataRequest> requests;
+    public static List<WsDataRequest> requests;
 
     List<WsDataRequest> requestsAcepted;
     List<WsDataRequest> requestsPending;
@@ -88,7 +88,14 @@ public class PedidosFragment extends BaseFragment
         View x = inflater.inflate(R.layout.appu_pedidos_fragment, null);
         injectView(x);
         initUi();
-        loadPresenter();
+        if(Helper.isConnectedToInternet(getContext()))
+        {
+            loadPresenter();
+        }
+        else
+        {
+           // Toast.makeText(getContext(), "No tienes Internet", Toast.LENGTH_LONG).show();
+        }
 
 
         return x;
@@ -190,11 +197,11 @@ public class PedidosFragment extends BaseFragment
 
 
     @Override
-    public void onPedidosListDataAdapterClicked(View v, Integer position, String Action) {
+    public void onPedidosListDataAdapterClicked(View v, Integer position, String Action,WsDataRequest wsDataRequest) {
 
-        Integer idRequest = requests.get(position).getId();
-        String solicitado = requests.get(position).getFull_name_customer();
-        String fecha= requests.get(position).getDate_availability();
+        Integer idRequest = wsDataRequest.getId();
+        String solicitado =wsDataRequest.getFull_name_customer();
+        String fecha= wsDataRequest.getDate_availability();
 
         showAlert(idRequest,solicitado,fecha,Action);
     }
@@ -313,6 +320,11 @@ public class PedidosFragment extends BaseFragment
 
     @Override
     public void recoveryPasswordSuccess(String mensaje) {
+
+    }
+
+    @Override
+    public void deleteLocalSuccess(String mensaje) {
 
     }
 

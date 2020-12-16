@@ -138,19 +138,30 @@ public class EditProfileActivity extends BaseActivity implements UserView, Impor
             public void onSingleClick(View v) {
                 switch (v.getId()) {
                     case R.id.ivApply:
-                        if (validations()) {
-                            if (!loading.isShowing()) {
-                                loading.show();
+
+                        if(Helper.isConnectedToInternet(getContext()))
+                        {
+                            if (validations()) {
+                                if (!loading.isShowing()) {
+                                    loading.show();
+                                }
+                                uploadPhoto(ivUserImage);
                             }
-                            uploadPhoto(ivUserImage);
                         }
+                        else
+                        {
+                            Toast.makeText(getContext(), "No tienes Internet", Toast.LENGTH_LONG).show();
+                        }
+
+
+
 
                         break;
                     case R.id.ivClose:
                         finish();
                         break;
                     case R.id.tvCambiarFoto:
-                        requestPermission();
+                            requestPermission();
                         break;
                 }
             }
@@ -627,6 +638,11 @@ public class EditProfileActivity extends BaseActivity implements UserView, Impor
 
     @Override
     public void recoveryPasswordSuccess(String mensaje) {
+
+    }
+
+    @Override
+    public void deleteLocalSuccess(String mensaje) {
 
     }
 

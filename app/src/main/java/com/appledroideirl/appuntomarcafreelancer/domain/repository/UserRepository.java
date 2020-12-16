@@ -16,6 +16,7 @@ import com.appledroideirl.appuntomarcafreelancer.interactor.usuario.AddLocalCall
 import com.appledroideirl.appuntomarcafreelancer.interactor.usuario.AddServiceCallback;
 import com.appledroideirl.appuntomarcafreelancer.interactor.usuario.AddSubServiceCallback;
 import com.appledroideirl.appuntomarcafreelancer.interactor.usuario.AddUserCallback;
+import com.appledroideirl.appuntomarcafreelancer.interactor.usuario.DeleteLocalCallback;
 import com.appledroideirl.appuntomarcafreelancer.interactor.usuario.EditUserCallback;
 import com.appledroideirl.appuntomarcafreelancer.interactor.usuario.GenerateTokenCallback;
 import com.appledroideirl.appuntomarcafreelancer.interactor.usuario.ListAvailableDateHourCallback;
@@ -70,5 +71,8 @@ public interface UserRepository {
     void addLocal(String token, WsParameterAgregarLocal wsParameterAgregarLocal, AddLocalCallback addLocalCallback);
 
     void recoveryPassword(String token, WsParameterRecoveryPassword wsParameterRecoveryPassword, RecoveryPasswordCallback recoveryPasswordCallback);
+
+    void deleteLocal(String token, int idLocal, DeleteLocalCallback deleteLocalCallback);
+
 
 }

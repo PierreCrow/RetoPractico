@@ -59,6 +59,8 @@ public interface UserView extends BaseView {
 
     void recoveryPasswordSuccess(String mensaje);
 
+    void deleteLocalSuccess(String mensaje);
+
 
     void showLoading();
 

@@ -36,7 +36,7 @@ public class EscogeSubServicioListDataAdapter extends
     }
 
     public interface OnEscogeSubServicioListDataAdapterClickListener {
-        void onEscogeSubServicioListDataAdapterClicked(View v, Integer position,boolean add,Double price);
+        void onEscogeSubServicioListDataAdapterClicked(View v, Integer position, boolean add, Double price);
     }
 
     @Override
@@ -57,7 +57,7 @@ public class EscogeSubServicioListDataAdapter extends
         }
         holder.etPrice.setText(subServicio.getCharge());
 
-        textChangeListenr(holder.etPrice,subServicio.getId());
+        textChangeListenr(holder.etPrice, subServicio.getId());
 
     }
 
@@ -84,56 +84,75 @@ public class EscogeSubServicioListDataAdapter extends
         @Override
         public void onClick(View view) {
 
-            Double precioo=Double.parseDouble(etPrice.getText().toString());
+            Double precioo = Double.parseDouble(etPrice.getText().toString());
 
-            boolean acvtivado=false;
+            boolean acvtivado = false;
 
-            if(view==chbCheck)
-            {
-                acvtivado=chbCheck.isChecked();
+            if (view == chbCheck) {
+                acvtivado = chbCheck.isChecked();
             }
 
-            if(acvtivado)
+            if (acvtivado) {
+                mlistener.onEscogeSubServicioListDataAdapterClicked(view, this.getPosition(), true, precioo);
+                itemsList.get(this.getPosition()).setEnable(1);
+            } else {
+                mlistener.onEscogeSubServicioListDataAdapterClicked(view, this.getPosition(), false, precioo);
+                itemsList.get(this.getPosition()).setEnable(0);
+            }
+
+
+
+            AjustesServicioDialog.positionAdapter=this.getPosition();
+
+            boolean allChecks=true;
+
+            for(SubService subService:itemsList)
             {
-                mlistener.onEscogeSubServicioListDataAdapterClicked(view, this.getPosition(),true,precioo);
+               if(subService.getEnable()==0)
+               {
+                   allChecks=false;
+               }
+            }
+
+            if(allChecks)
+            {
+                AjustesServicioDialog.chbEscogeTodo.setChecked(true);
             }
             else
             {
-                mlistener.onEscogeSubServicioListDataAdapterClicked(view, this.getPosition(),false,precioo);
+                AjustesServicioDialog.fromAdapter=true;
+                AjustesServicioDialog.chbEscogeTodo.setChecked(false);
             }
+
 
         }
     }
 
 
-    void textChangeListenr(EditText editText,Integer idd)
-    {
+    void textChangeListenr(EditText editText, Integer idd) {
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count,
                                           int after) {
             }
+
             @Override
             public void onTextChanged(final CharSequence s, int start, int before,
                                       int count) {
 
             }
+
             @Override
             public void afterTextChanged(final Editable s) {
                 //avoid triggering event when text is too short
                 if (s.toString().equals("")) {
-                }
-                else
-                {
-                    for(int i=0;i< AjustesServicioDialog.subServicesToAdd.size();i++)
-                    {
-                        if(idd==AjustesServicioDialog.subServicesToAdd.get(i).getId_sub_service())
-                        {
+                } else {
+                    for (int i = 0; i < AjustesServicioDialog.subServicesToAdd.size(); i++) {
+                        if (idd == AjustesServicioDialog.subServicesToAdd.get(i).getId_sub_service()) {
                             AjustesServicioDialog.subServicesToAdd.get(i).setCharge(Double.parseDouble(s.toString()));
                         }
                     }
                 }
-
 
 
             }

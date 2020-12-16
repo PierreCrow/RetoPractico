@@ -212,34 +212,48 @@ public class CompletarDatosFreelancerActivity
                     etPass.setError("Ingrese contraseña");
                     etPass.requestFocus();
                 } else {
-                    if (etRepeatPass.getText().toString().equals("")) {
-                        etRepeatPass.setError("Ingrese contraseña");
-                        etRepeatPass.requestFocus();
-                    } else {
-                        if (!etPass.getText().toString().equals(etRepeatPass.getText().toString())) {
-                            etNames.setError("Contraseña distinta");
-                            etRepeatPass.setError("Contraseña distinta");
-                            etPass.requestFocus();
-                        } else {
-                            if (etCellPhone.getText().toString().equals("")) {
-                                etCellPhone.setError("Ingrese teléfono");
-                                etCellPhone.requestFocus();
-                            } else {
-                                if (spiTypeDocs.getSelectedItem().toString().equals("Tipo de documento")) {
-                                    Toast.makeText(getApplicationContext(), "Ingrese tipo de documento", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    if (etDocNumber.getText().toString().equals("")) {
-                                        etDocNumber.setError("Ingrese número de documento");
-                                        etDocNumber.requestFocus();
-                                    } else {
-                                        esCorrecto = true;
-                                    }
 
+                    if(etPass.getText().toString().length()<6)
+                    {
+                        etPass.setError("Mínimo 6 caracteres");
+                        etPass.requestFocus();
+                    }
+                    else
+                    {
+                        if (etRepeatPass.getText().toString().equals("")) {
+                            etRepeatPass.setError("Ingrese contraseña");
+                            etRepeatPass.requestFocus();
+                        } else {
+                            if (!etPass.getText().toString().equals(etRepeatPass.getText().toString())) {
+                                etNames.setError("Contraseña distinta");
+                                etRepeatPass.setError("Contraseña distinta");
+                                etPass.requestFocus();
+                            } else {
+                                if (etCellPhone.getText().toString().equals("")) {
+                                    etCellPhone.setError("Ingrese teléfono");
+                                    etCellPhone.requestFocus();
+                                } else {
+                                    if (spiTypeDocs.getSelectedItem().toString().equals("Tipo de documento")) {
+                                        Toast.makeText(getApplicationContext(), "Ingrese tipo de documento", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        if (etDocNumber.getText().toString().equals("")) {
+                                            etDocNumber.setError("Ingrese número de documento");
+                                            etDocNumber.requestFocus();
+                                        } else {
+                                            esCorrecto = true;
+                                        }
+
+                                    }
                                 }
                             }
-                        }
 
+                        }
                     }
+
+
+
+
+
                 }
 
 
@@ -650,6 +664,13 @@ public class CompletarDatosFreelancerActivity
         usuario.setId_type_document(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getId_type_document());
         usuario.setDocument_number(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getDocument_number());
 
+        if(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getAvg_rate()!=null)
+        {
+            usuario.setAvg_rate(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getAvg_rate());
+        }
+
+
+
         Helper.saveUserAppPreference(getApplicationContext(),usuario);
 
         Toast.makeText(getContext(), "Registro exitoso", Toast.LENGTH_LONG).show();
@@ -689,6 +710,11 @@ public class CompletarDatosFreelancerActivity
 
     @Override
     public void recoveryPasswordSuccess(String mensaje) {
+
+    }
+
+    @Override
+    public void deleteLocalSuccess(String mensaje) {
 
     }
 

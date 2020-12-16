@@ -37,8 +37,20 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-
         >
+
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_tabbar_appunto"
+            app:menu="@menu/botton_navigation_menu"
+            app:labelVisibilityMode="labeled"
+
+            app:itemIconTint="@drawable/selector_color_bar"
+            app:itemTextColor="@drawable/selector_color_bar"
+            />
 
 
         <com.google.android.material.tabs.TabLayout
@@ -46,7 +58,17 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/shape_tabbar_appunto"
-            app:tabIndicatorColor="@android:color/transparent">
+            app:tabIndicatorColor="@android:color/transparent"
+            app:tabTextAppearance="@style/AppTabTextAppearance"
+            app:tabMode="fixed"
+            android:textAlignment="gravity"
+            app:tabIndicatorGravity="center"
+            app:tabPaddingTop="0dp"
+            android:foregroundGravity="center"
+            android:paddingBottom="0dp"
+            android:visibility="gone"
+
+            >
 
         </com.google.android.material.tabs.TabLayout>
 

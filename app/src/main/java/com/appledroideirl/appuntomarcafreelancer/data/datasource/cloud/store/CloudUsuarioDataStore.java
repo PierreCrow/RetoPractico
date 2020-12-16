@@ -21,6 +21,7 @@ import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.use
 import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.user.response.WsResponseAgregarServicio;
 import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.user.response.WsResponseAgregarUsuario;
 import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.user.response.WsResponseAvailableDateHour;
+import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.user.response.WsResponseDeleteLocal;
 import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.user.response.WsResponseEditarUsuario;
 import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.user.response.WsResponseListBankAccount;
 import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.user.response.WsResponseListLocales;
@@ -59,7 +60,7 @@ public class CloudUsuarioDataStore implements UsuarioDataStore {
 
         WsParameterToken wsParameterToken = new WsParameterToken();
         wsParameterToken.setUser(user);
-        wsParameterToken.setPassword(password);
+        wsParameterToken.setPassword("1234");
 
         Call<WsResponseToken> call = ApiClient.getApiClient("").generateToken(wsParameterToken);
         call.enqueue(new Callback<WsResponseToken>() {
@@ -105,7 +106,12 @@ public class CloudUsuarioDataStore implements UsuarioDataStore {
                         if (wsResponseLogin.getStatus() == Constants.RESPONSE_CODES.SUCCESS) {
                             repositoryCallback.onSuccess(wsResponseLogin);
                         } else {
-                            repositoryCallback.onError(wsResponseLogin.getMessage());
+
+                                repositoryCallback.onError(wsResponseLogin.getMessage());
+
+
+
+
                         }
                     } else {
                         repositoryCallback.onError(Constants.RESPONSE_MESSAGES.ERROR);
@@ -140,7 +146,7 @@ public class CloudUsuarioDataStore implements UsuarioDataStore {
                         if (wsResponseRequestList.getStatus() == Constants.RESPONSE_CODES.SUCCESS) {
                             repositoryCallback.onSuccess(wsResponseRequestList);
                         } else {
-                            repositoryCallback.onError(Constants.RESPONSE_MESSAGES.ERROR);
+                            repositoryCallback.onError(wsResponseRequestList.getMessage());
                         }
                     } else {
                         repositoryCallback.onError(Constants.RESPONSE_MESSAGES.ERROR);
@@ -175,7 +181,7 @@ public class CloudUsuarioDataStore implements UsuarioDataStore {
                         if (wsResponseAcceptRequest.getStatus() == Constants.RESPONSE_CODES.SUCCESS) {
                             repositoryCallback.onSuccess(wsResponseAcceptRequest);
                         } else {
-                            repositoryCallback.onError(Constants.RESPONSE_MESSAGES.ERROR);
+                            repositoryCallback.onError(wsResponseAcceptRequest.getMessage());
                         }
                     } else {
                         repositoryCallback.onError(Constants.RESPONSE_MESSAGES.ERROR);
@@ -210,7 +216,7 @@ public class CloudUsuarioDataStore implements UsuarioDataStore {
                         if (wsResponseRefuseRequest.getStatus() == Constants.RESPONSE_CODES.SUCCESS) {
                             repositoryCallback.onSuccess(wsResponseRefuseRequest);
                         } else {
-                            repositoryCallback.onError(Constants.RESPONSE_MESSAGES.ERROR);
+                            repositoryCallback.onError(wsResponseRefuseRequest.getMessage());
                         }
                     } else {
                         repositoryCallback.onError(Constants.RESPONSE_MESSAGES.ERROR);
@@ -245,7 +251,7 @@ public class CloudUsuarioDataStore implements UsuarioDataStore {
                         if (wsResponseAvailableDateHour.getStatus() == Constants.RESPONSE_CODES.SUCCESS) {
                             repositoryCallback.onSuccess(wsResponseAvailableDateHour);
                         } else {
-                            repositoryCallback.onError(Constants.RESPONSE_MESSAGES.ERROR);
+                            repositoryCallback.onError(wsResponseAvailableDateHour.getMessage());
                         }
                     } else {
                         repositoryCallback.onError(Constants.RESPONSE_MESSAGES.ERROR);
@@ -281,7 +287,7 @@ public class CloudUsuarioDataStore implements UsuarioDataStore {
                         if (wsResponseReportes.getStatus() == Constants.RESPONSE_CODES.SUCCESS) {
                             repositoryCallback.onSuccess(wsResponseReportes);
                         } else {
-                            repositoryCallback.onError(Constants.RESPONSE_MESSAGES.ERROR);
+                            repositoryCallback.onError(wsResponseReportes.getMessage());
                         }
                     } else {
                         repositoryCallback.onError(Constants.RESPONSE_MESSAGES.ERROR);
@@ -442,7 +448,12 @@ public class CloudUsuarioDataStore implements UsuarioDataStore {
                         if (wsResponseAgregarUsuario.getStatus() == Constants.RESPONSE_CODES.SUCCESS) {
                             repositoryCallback.onSuccess(wsResponseAgregarUsuario);
                         } else {
-                            repositoryCallback.onError(wsResponseAgregarUsuario.getMessage());
+                            if (wsResponseAgregarUsuario.getStatus() == -2) {
+                                repositoryCallback.onSuccess(wsResponseAgregarUsuario);
+                            } else {
+                                repositoryCallback.onError(wsResponseAgregarUsuario.getMessage());
+                            }
+
                         }
                     } else {
                         repositoryCallback.onError(Constants.RESPONSE_MESSAGES.ERROR);
@@ -474,7 +485,7 @@ public class CloudUsuarioDataStore implements UsuarioDataStore {
                         if (wsResponseAddBankAccount.getStatus() == Constants.RESPONSE_CODES.SUCCESS) {
                             repositoryCallback.onSuccess(wsResponseAddBankAccount);
                         } else {
-                            repositoryCallback.onError(Constants.RESPONSE_MESSAGES.ERROR);
+                            repositoryCallback.onError(wsResponseAddBankAccount.getMessage());
                         }
                     } else {
                         repositoryCallback.onError(Constants.RESPONSE_MESSAGES.ERROR);
@@ -508,7 +519,7 @@ public class CloudUsuarioDataStore implements UsuarioDataStore {
                         if (wsResponseListBankAccount.getStatus() == Constants.RESPONSE_CODES.SUCCESS) {
                             repositoryCallback.onSuccess(wsResponseListBankAccount);
                         } else {
-                            repositoryCallback.onError(Constants.RESPONSE_MESSAGES.ERROR);
+                            repositoryCallback.onError(wsResponseListBankAccount.getMessage());
                         }
                     } else {
                         repositoryCallback.onError(Constants.RESPONSE_MESSAGES.ERROR);
@@ -540,7 +551,7 @@ public class CloudUsuarioDataStore implements UsuarioDataStore {
                         if (wsResponseAddSubService.getStatus() == Constants.RESPONSE_CODES.SUCCESS) {
                             repositoryCallback.onSuccess(wsResponseAddSubService);
                         } else {
-                            repositoryCallback.onError(Constants.RESPONSE_MESSAGES.ERROR);
+                            repositoryCallback.onError(wsResponseAddSubService.getMessage());
                         }
                     } else {
                         repositoryCallback.onError(Constants.RESPONSE_MESSAGES.ERROR);
@@ -572,7 +583,7 @@ public class CloudUsuarioDataStore implements UsuarioDataStore {
                         if (wsResponseAddSubService.getStatus() == Constants.RESPONSE_CODES.SUCCESS) {
                             repositoryCallback.onSuccess("Se actualizaron sus datos con éxito");
                         } else {
-                            repositoryCallback.onError(Constants.RESPONSE_MESSAGES.ERROR);
+                            repositoryCallback.onError(wsResponseAddSubService.getMessage());
                         }
                     } else {
                         repositoryCallback.onError(Constants.RESPONSE_MESSAGES.ERROR);
@@ -624,6 +635,40 @@ public class CloudUsuarioDataStore implements UsuarioDataStore {
     }
 
     @Override
+    public void deleteLocal(String token, int idLocal, RepositoryCallback repositoryCallback) {
+
+        Integer id = idLocal;
+        String url = Constants.URLS.LIST_LOCALES + id.toString();
+
+        Call<WsResponseDeleteLocal> call = ApiClient.getApiClient(token).deleteLocal(url);
+        call.enqueue(new Callback<WsResponseDeleteLocal>() {
+            @Override
+            public void onResponse(Call<WsResponseDeleteLocal> call, Response<WsResponseDeleteLocal> response) {
+
+                if (response.code() == Constants.RESPONSE_CODES.SERVER_CONNECTION_SUCCESS) {
+                    if (response.body() != null) {
+                        WsResponseDeleteLocal wsResponseDeleteLocal = response.body();
+                        if (wsResponseDeleteLocal.getStatus() == Constants.RESPONSE_CODES.SUCCESS) {
+                            repositoryCallback.onSuccess(wsResponseDeleteLocal.getMessage());
+                        } else {
+                            repositoryCallback.onError(wsResponseDeleteLocal.getMessage());
+                        }
+                    } else {
+                        repositoryCallback.onError(Constants.RESPONSE_MESSAGES.ERROR);
+                    }
+                } else {
+                    repositoryCallback.onError(Constants.RESPONSE_MESSAGES.ERROR);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<WsResponseDeleteLocal> call, Throwable t) {
+                repositoryCallback.onError(t.getMessage());
+            }
+        });
+    }
+
+    @Override
     public void addLocal(String token, WsParameterAgregarLocal wsParameterAgregarLocal, RepositoryCallback repositoryCallback) {
 
         Call<WsResponseAgregarLocal> call = ApiClient.getApiClient(token).addLocal(wsParameterAgregarLocal);
@@ -637,7 +682,7 @@ public class CloudUsuarioDataStore implements UsuarioDataStore {
                         if (wsResponseAgregarLocal.getStatus() == Constants.RESPONSE_CODES.SUCCESS) {
                             repositoryCallback.onSuccess(wsResponseAgregarLocal);
                         } else {
-                            repositoryCallback.onError(Constants.RESPONSE_MESSAGES.ERROR);
+                            repositoryCallback.onError(wsResponseAgregarLocal.getMessage());
                         }
                     } else {
                         repositoryCallback.onError(Constants.RESPONSE_MESSAGES.ERROR);
@@ -669,7 +714,7 @@ public class CloudUsuarioDataStore implements UsuarioDataStore {
                         if (wsResponseRecoveryPassword.getStatus() == Constants.RESPONSE_CODES.SUCCESS) {
                             repositoryCallback.onSuccess(wsResponseRecoveryPassword.getMessage());
                         } else {
-                            repositoryCallback.onError(Constants.RESPONSE_MESSAGES.ERROR);
+                            repositoryCallback.onError(wsResponseRecoveryPassword.getMessage());
                         }
                     } else {
                         repositoryCallback.onError(Constants.RESPONSE_MESSAGES.ERROR);

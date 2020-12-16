@@ -36,6 +36,10 @@ public class WsDataRequest {
     @Expose
     private String full_name_card = null;
 
+    @SerializedName("comment")
+    @Expose
+    private String comment = null;
+
     @SerializedName("full_name_type_availability")
     @Expose
     private String full_name_type_availability = null;
@@ -259,5 +263,13 @@ public class WsDataRequest {
 
     public void setUrl_image_customer(String url_image_customer) {
         this.url_image_customer = url_image_customer;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 }

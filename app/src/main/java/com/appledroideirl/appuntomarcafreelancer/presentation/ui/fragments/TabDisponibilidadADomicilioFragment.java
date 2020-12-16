@@ -42,6 +42,7 @@ import com.appledroideirl.appuntomarcafreelancer.presentation.utils.SingleClick;
 import com.appledroideirl.appuntomarcafreelancer.presentation.utils.TransparentProgressDialog;
 import com.appledroideirl.appuntomarcafreelancer.presentation.view.UserView;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -81,6 +82,15 @@ public class TabDisponibilidadADomicilioFragment extends BaseFragment implements
     @BindView(R.id.swDiesiocho)
     Switch swDiesiocho;
 
+    @BindView(R.id.swDiesinueve)
+    Switch swDiesinueve;
+    @BindView(R.id.swVeinte)
+    Switch swVeinte;
+    @BindView(R.id.swVeintiuno)
+    Switch swVeintiuno;
+    @BindView(R.id.swVeintidos)
+    Switch swVeintidos;
+
     @BindView(R.id.ivContinue)
     ImageView ivContinue;
 
@@ -102,7 +112,14 @@ public class TabDisponibilidadADomicilioFragment extends BaseFragment implements
         View x = inflater.inflate(R.layout.appu_tab_disponibilidad_adomicilio, null);
         injectView(x);
         initUI();
-        loadPresenter();
+        if(Helper.isConnectedToInternet(getContext()))
+        {
+            loadPresenter();
+        }
+        else
+        {
+            Toast.makeText(getContext(), "No tienes Internet", Toast.LENGTH_LONG).show();
+        }
 
         return x;
     }
@@ -132,7 +149,14 @@ public class TabDisponibilidadADomicilioFragment extends BaseFragment implements
             public void onSingleClick(View v) {
                 switch (v.getId()) {
                     case R.id.ivContinue:
-                        showAlert();
+                        if(Helper.isConnectedToInternet(getContext()))
+                        {
+                            showAlert();
+                        }
+                        else
+                        {
+                            Toast.makeText(getContext(), "No tienes Internet", Toast.LENGTH_LONG).show();
+                        }
                         break;
                 }
             }
@@ -165,7 +189,19 @@ public class TabDisponibilidadADomicilioFragment extends BaseFragment implements
 
                 fechaasa = diaaa + "-" + mezzz + "-" + anoo.toString();
 
-                tvTextFecha.setText(fechaasa);
+                String finallll="";
+                String date="";
+                SimpleDateFormat dateFormat= new SimpleDateFormat("dd-MM-yyyy");
+                try {
+                    Date d=dateFormat.parse(fechaasa);
+                    date=  DateFormat.getDateInstance(DateFormat.FULL).format(d);
+                    String upperString = date.substring(0, 1).toUpperCase() + date.substring(1).toLowerCase();
+                    finallll= deleteLast7Characts(upperString).replace(",","");
+                }
+                catch(Exception e) {
+                }
+
+                tvTextFecha.setText(finallll);
 
                 horasDisponibles = new ArrayList<>();
 
@@ -180,6 +216,11 @@ public class TabDisponibilidadADomicilioFragment extends BaseFragment implements
                 swDiesiseis.setChecked(false);
                 swDiesisiete.setChecked(false);
                 swDiesiocho.setChecked(false);
+
+                swDiesinueve.setChecked(false);
+                swVeinte.setChecked(false);
+                swVeintiuno.setChecked(false);
+                swVeintidos.setChecked(false);
 
                 for (WsDataAvailableDateHour fecha : dateHours) {
                     if (fechaasa.equals(fecha.getDate_availability())) {
@@ -228,11 +269,51 @@ public class TabDisponibilidadADomicilioFragment extends BaseFragment implements
                                 swDiesiocho.setChecked(true);
                                 horasDisponibles.add(18);
                             }
+
+                            if (hora == 19) {
+                                swDiesinueve.setChecked(true);
+                                horasDisponibles.add(19);
+                            }
+
+                            if (hora == 20) {
+                                swVeinte.setChecked(true);
+                                horasDisponibles.add(20);
+                            }
+
+                            if (hora == 21) {
+                                swVeintiuno.setChecked(true);
+                                horasDisponibles.add(21);
+                            }
+
+                            if (hora == 22) {
+                                swVeintidos.setChecked(true);
+                                horasDisponibles.add(22);
+                            }
                         }
 
                     }
                 }
                 horasDisponibles = new ArrayList<Integer>(new LinkedHashSet<Integer>(horasDisponibles));
+
+                if(horasDisponibles.size()==0)
+                {
+                    swOcho.setChecked(false);
+                    swNueve.setChecked(false);
+                    swDiez.setChecked(false);
+                    swOnce.setChecked(false);
+                    swDoce.setChecked(false);
+                    swTrece.setChecked(false);
+                    swCatorce.setChecked(false);
+                    swQuince.setChecked(false);
+                    swDiesiseis.setChecked(false);
+                    swDiesisiete.setChecked(false);
+                    swDiesiocho.setChecked(false);
+
+                    swDiesinueve.setChecked(false);
+                    swVeinte.setChecked(false);
+                    swVeintiuno.setChecked(false);
+                    swVeintidos.setChecked(false);
+                }
 
             }
         });
@@ -483,6 +564,84 @@ public class TabDisponibilidadADomicilioFragment extends BaseFragment implements
             }
         });
 
+        swDiesinueve.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (isChecked) {
+                    horasDisponibles.add(19);
+                } else {
+                    //si se desmarca
+                    boolean exist = false;
+                    for (int i = 0; i < horasDisponibles.size(); i++) {
+                        if (horasDisponibles.get(i) == 19) {
+                            horasDisponibles.remove(i);
+                            break;
+                        }
+                    }
+                }
+                horasDisponibles = new ArrayList<Integer>(new LinkedHashSet<Integer>(horasDisponibles));
+            }
+        });
+
+        swVeinte.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (isChecked) {
+                    horasDisponibles.add(20);
+                } else {
+                    //si se desmarca
+                    boolean exist = false;
+                    for (int i = 0; i < horasDisponibles.size(); i++) {
+                        if (horasDisponibles.get(i) == 20) {
+                            horasDisponibles.remove(i);
+                            break;
+                        }
+                    }
+                }
+                horasDisponibles = new ArrayList<Integer>(new LinkedHashSet<Integer>(horasDisponibles));
+            }
+        });
+
+
+        swVeintiuno.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (isChecked) {
+                    horasDisponibles.add(21);
+                } else {
+                    //si se desmarca
+                    boolean exist = false;
+                    for (int i = 0; i < horasDisponibles.size(); i++) {
+                        if (horasDisponibles.get(i) == 21) {
+                            horasDisponibles.remove(i);
+                            break;
+                        }
+                    }
+                }
+                horasDisponibles = new ArrayList<Integer>(new LinkedHashSet<Integer>(horasDisponibles));
+            }
+        });
+
+
+        swVeintidos.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if (isChecked) {
+                    horasDisponibles.add(22);
+                } else {
+                    //si se desmarca
+                    boolean exist = false;
+                    for (int i = 0; i < horasDisponibles.size(); i++) {
+                        if (horasDisponibles.get(i) == 22) {
+                            horasDisponibles.remove(i);
+                            break;
+                        }
+                    }
+                }
+                horasDisponibles = new ArrayList<Integer>(new LinkedHashSet<Integer>(horasDisponibles));
+            }
+        });
+
     }
 
 
@@ -511,6 +670,14 @@ public class TabDisponibilidadADomicilioFragment extends BaseFragment implements
 
     }
 
+    public  String deleteLast7Characts(String args) {
+        String s = args;
+        String resultado=s.substring(0, s.length() - 7);
+        //   System.out.println(s.substring(0, s.length() - 7));
+
+        return resultado;
+    }
+
     @Override
     public void listAvailableDateHourSuccess(WsResponseAvailableDateHour wsResponseAvailableDateHour) {
         if (loading.isShowing()) {
@@ -526,7 +693,22 @@ public class TabDisponibilidadADomicilioFragment extends BaseFragment implements
         }
 
         fechaasa= getCurrentDate();
-        tvTextFecha.setText(fechaasa);
+
+
+        String finallll="";
+        String date="";
+        SimpleDateFormat dateFormat= new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            Date d=dateFormat.parse(fechaasa);
+            date=  DateFormat.getDateInstance(DateFormat.FULL).format(d);
+            String upperString = date.substring(0, 1).toUpperCase() + date.substring(1).toLowerCase();
+            finallll= deleteLast7Characts(upperString).replace(",","");
+        }
+        catch(Exception e) {
+        }
+
+        tvTextFecha.setText(finallll);
+
         horasDisponibles = new ArrayList<>();
         for (WsDataAvailableDateHour fecha : dateHours) {
             if (fechaasa.equals(fecha.getDate_availability())) {
@@ -575,6 +757,26 @@ public class TabDisponibilidadADomicilioFragment extends BaseFragment implements
                         swDiesiocho.setChecked(true);
                         horasDisponibles.add(18);
                     }
+
+                    if (hora == 19) {
+                        swDiesinueve.setChecked(true);
+                        horasDisponibles.add(19);
+                    }
+
+                    if (hora == 20) {
+                        swVeinte.setChecked(true);
+                        horasDisponibles.add(20);
+                    }
+
+                    if (hora == 21) {
+                        swVeintiuno.setChecked(true);
+                        horasDisponibles.add(21);
+                    }
+
+                    if (hora == 22) {
+                        swVeintidos.setChecked(true);
+                        horasDisponibles.add(22);
+                    }
                 }
 
             }
@@ -594,6 +796,11 @@ public class TabDisponibilidadADomicilioFragment extends BaseFragment implements
             swDiesiseis.setChecked(false);
             swDiesisiete.setChecked(false);
             swDiesiocho.setChecked(false);
+
+            swDiesinueve.setChecked(false);
+            swVeinte.setChecked(false);
+            swVeintiuno.setChecked(false);
+            swVeintidos.setChecked(false);
         }
 
     }
@@ -673,6 +880,11 @@ public class TabDisponibilidadADomicilioFragment extends BaseFragment implements
 
     @Override
     public void recoveryPasswordSuccess(String mensaje) {
+
+    }
+
+    @Override
+    public void deleteLocalSuccess(String mensaje) {
 
     }
 

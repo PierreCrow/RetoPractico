@@ -17,6 +17,7 @@ import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.use
 import com.appledroideirl.appuntomarcafreelancer.domain.model.Pedido;
 import com.appledroideirl.appuntomarcafreelancer.presentation.utils.Constants;
 import com.appledroideirl.appuntomarcafreelancer.presentation.utils.Helper;
+import com.google.rpc.Help;
 
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class PedidosListDataAdapter extends RecyclerView.Adapter<PedidosListData
     }
 
     public interface OnPedidosListDataAdapterClickListener {
-        void onPedidosListDataAdapterClicked(View v, Integer position, String Action);
+        void onPedidosListDataAdapterClicked(View v, Integer position, String Action,WsDataRequest wsDataRequest);
     }
 
     @Override
@@ -56,15 +57,24 @@ public class PedidosListDataAdapter extends RecyclerView.Adapter<PedidosListData
 
         holder.tvSolitudClient.setText("Solicitado por " + pedido.getFull_name_customer());
 
-        Helper.urlToImageView(pedido.getUrl_image_customer(), holder.ivClientPicture, mContext);
+        if(!pedido.getUrl_image_customer().equals(""))
+        {
+            Helper.urlToImageView(pedido.getUrl_image_customer(), holder.ivClientPicture, mContext);
+        }
+
+
 
         holder.tvFecha.setText(pedido.getDate_availability());
         holder.tvNameServicio.setText("Servicio " + "");
 
         Integer horaaa = pedido.getHour_availability();
         holder.tvHora.setText(horaaa.toString() + ":00");
-        holder.tvLugar.setText(pedido.getAddress());
-        holder.tvTotal.setText("S/" + pedido.getTotal_amount().toString());
+
+        String amountFinal= Helper.convertTwoDecimals(pedido.getTotal_amount());
+
+        holder.tvTotal.setText("S/" + amountFinal);
+
+        holder.tvComment.setText(pedido.getComment());
 
         adapter = new SubServicioSolicitudesListDataAdapter(mContext, pedido.getWsDataSales());
         //  holder.rvUserservicios.setHasFixedSize(true);
@@ -73,7 +83,19 @@ public class PedidosListDataAdapter extends RecyclerView.Adapter<PedidosListData
 
         if (pedido.getStatus_sale() == Constants.SOLICITUD_TYPES.ACEPTADO_POR_USUARIO) {
             holder.llBotones.setVisibility(View.GONE);
+            holder.ivBotonCheck.setVisibility(View.VISIBLE);
         }
+
+        holder.tvLugar.setText(pedido.getAddress());
+
+        if(pedido.getId_type_availability()==2)
+        {
+            holder.tvLugar.setVisibility(View.GONE);
+            holder.tvTituloLugar.setVisibility(View.GONE);
+        }
+
+
+
 
     }
 
@@ -87,12 +109,12 @@ public class PedidosListDataAdapter extends RecyclerView.Adapter<PedidosListData
 
 
         protected LinearLayout llAEsconder;
-        protected ImageView ivBotonVer;
+        protected ImageView ivBotonVer,ivBotonCheck;
         protected TextView tvSolitudClient;
-        protected TextView tvTotal;
+        protected TextView tvTotal,tvComment;
         protected TextView tvHora;
         protected TextView tvFecha;
-        protected TextView tvLugar;
+        protected TextView tvLugar,tvTituloLugar;
         protected RecyclerView rvUserservicios;
         protected ImageView ivClientPicture;
         protected TextView tvNameServicio;
@@ -109,8 +131,10 @@ public class PedidosListDataAdapter extends RecyclerView.Adapter<PedidosListData
 
             this.tvSolitudClient = (TextView) view.findViewById(R.id.tvSolitudClient);
             this.tvNameServicio = (TextView) view.findViewById(R.id.tvNameServicio);
+            this.tvComment = (TextView) view.findViewById(R.id.tvComment);
             this.llAEsconder = (LinearLayout) view.findViewById(R.id.llAEsconder);
             this.ivBotonVer = (ImageView) view.findViewById(R.id.ivBotonVer);
+            this.ivBotonCheck = (ImageView) view.findViewById(R.id.ivBotonCheck);
             this.rvUserservicios = (RecyclerView) view.findViewById(R.id.rvUserservicios);
 
             this.tvTotal = (TextView) view.findViewById(R.id.tvTotal);
@@ -118,6 +142,7 @@ public class PedidosListDataAdapter extends RecyclerView.Adapter<PedidosListData
             this.tvFecha = (TextView) view.findViewById(R.id.tvFecha);
             this.tvLugar = (TextView) view.findViewById(R.id.tvLugar);
 
+            this.tvTituloLugar = (TextView) view.findViewById(R.id.tvTituloLugar);
             this.ivClientPicture = (ImageView) view.findViewById(R.id.ivClientPicture);
 
             this.btnAceptar = (Button) view.findViewById(R.id.btnAceptar);
@@ -134,10 +159,10 @@ public class PedidosListDataAdapter extends RecyclerView.Adapter<PedidosListData
         public void onClick(View view) {
 
             if (view == btnAceptar) {
-                mlistener.onPedidosListDataAdapterClicked(view, this.getPosition(), "ACEPT");
+                mlistener.onPedidosListDataAdapterClicked(view, this.getPosition(), "ACEPT",itemsList.get(this.getPosition()));
             } else {
                 if (view == btnDenegar) {
-                    mlistener.onPedidosListDataAdapterClicked(view, this.getPosition(), "REFUSE");
+                    mlistener.onPedidosListDataAdapterClicked(view, this.getPosition(), "REFUSE",itemsList.get(this.getPosition()));
                 } else {
 
                     if (view == ivBotonVer) {

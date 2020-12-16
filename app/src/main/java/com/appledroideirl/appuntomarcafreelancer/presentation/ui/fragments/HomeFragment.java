@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
@@ -43,6 +44,7 @@ import com.appledroideirl.appuntomarcafreelancer.presentation.utils.Constants;
 import com.appledroideirl.appuntomarcafreelancer.presentation.utils.Helper;
 import com.appledroideirl.appuntomarcafreelancer.presentation.utils.TransparentProgressDialog;
 import com.appledroideirl.appuntomarcafreelancer.presentation.view.UserView;
+import com.google.rpc.Help;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,7 +114,18 @@ public class HomeFragment extends BaseFragment
 
         loading = new TransparentProgressDialog(getContext());
 
-        loadPresenter();
+
+        if(Helper.isConnectedToInternet(getContext()))
+        {
+            loadPresenter();
+        }
+        else
+        {
+            Toast.makeText(getContext(), "No tienes Internet", Toast.LENGTH_LONG).show();
+        }
+
+
+
 
         llPedidos.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -336,6 +349,11 @@ public class HomeFragment extends BaseFragment
     }
 
     @Override
+    public void deleteLocalSuccess(String mensaje) {
+
+    }
+
+    @Override
     public void showLoading() {
 
     }
@@ -347,7 +365,10 @@ public class HomeFragment extends BaseFragment
 
     @Override
     public void showErrorMessage(String message) {
-
+        if (loading.isShowing()) {
+            loading.dismiss();
+        }
+        Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
     }
 
     @Override

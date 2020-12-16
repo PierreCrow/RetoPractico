@@ -29,6 +29,7 @@ import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.use
 import com.appledroideirl.appuntomarcafreelancer.domain.model.Usuario;
 import com.appledroideirl.appuntomarcafreelancer.presentation.presenter.UserPresenter;
 import com.appledroideirl.appuntomarcafreelancer.presentation.ui.dialogfragment.ForgotPasswordDialog;
+import com.appledroideirl.appuntomarcafreelancer.presentation.ui.dialogfragment.NoEntryLoginDialog;
 import com.appledroideirl.appuntomarcafreelancer.presentation.utils.Helper;
 import com.appledroideirl.appuntomarcafreelancer.presentation.utils.SingleClick;
 import com.appledroideirl.appuntomarcafreelancer.presentation.utils.TransparentProgressDialog;
@@ -114,6 +115,10 @@ public class LoginActivity extends BaseActivity implements UserView {
                         }
                         String emaill=tvemail.getText().toString().replace(" ","");
                         String passss=tvpass.getText().toString().replace(" ","");
+
+
+
+
                         SharedPreferences preferenciasssee = getApplicationContext().getSharedPreferences("FCM", Context.MODE_PRIVATE);
                         String holaaatoken=preferenciasssee.getString("tokenfcm","");
                         userPresenter.login(Helper.getUserAppPreference(getContext()).getToken(),holaaatoken,emaill,passss);
@@ -161,24 +166,41 @@ public class LoginActivity extends BaseActivity implements UserView {
         if (loading.isShowing()) {
             loading.dismiss();
         }
-        SharedPreferences preferenciasssee = getApplicationContext().getSharedPreferences("FCM", Context.MODE_PRIVATE);
-        String holaaatoken=preferenciasssee.getString("tokenfcm","");
-        usuario.setFcm(holaaatoken);
-        usuario.setPassword(tvpass.getText().toString());
-        usuario.setLogged(true);
-        usuario.setId(wsResponseLogin.getWsDataUser().getId());
-        usuario.setFull_name(wsResponseLogin.getWsDataUser().getFull_name());
-        usuario.setMail(wsResponseLogin.getWsDataUser().getMail());
-        usuario.setAbout(wsResponseLogin.getWsDataUser().getAbout());
-        usuario.setPhoto(wsResponseLogin.getWsDataUser().getPhoto());
-        usuario.setType_user(wsResponseLogin.getWsDataUser().getType_user());
-        usuario.setId_type_document(wsResponseLogin.getWsDataUser().getId_type_document());
-        usuario.setDocument_number(wsResponseLogin.getWsDataUser().getDocument_number());
-        usuario.setCellphone(wsResponseLogin.getWsDataUser().getCellphone());
 
-        Helper.saveUserAppPreference(getApplicationContext(),usuario);
-        next(MainActivity.class,null);
-    }
+
+            SharedPreferences preferenciasssee = getApplicationContext().getSharedPreferences("FCM", Context.MODE_PRIVATE);
+            String holaaatoken=preferenciasssee.getString("tokenfcm","");
+            usuario.setFcm(holaaatoken);
+            usuario.setPassword(tvpass.getText().toString());
+            usuario.setLogged(true);
+            //  usuario.setUser();
+            usuario.setId(wsResponseLogin.getWsDataUser().getId());
+            usuario.setFull_name(wsResponseLogin.getWsDataUser().getFull_name());
+            usuario.setMail(wsResponseLogin.getWsDataUser().getMail());
+            usuario.setAbout(wsResponseLogin.getWsDataUser().getAbout());
+            usuario.setPhoto(wsResponseLogin.getWsDataUser().getPhoto());
+            usuario.setType_user(wsResponseLogin.getWsDataUser().getType_user());
+            usuario.setId_type_document(wsResponseLogin.getWsDataUser().getId_type_document());
+            usuario.setDocument_number(wsResponseLogin.getWsDataUser().getDocument_number());
+            usuario.setCellphone(wsResponseLogin.getWsDataUser().getCellphone());
+
+
+            if(wsResponseLogin.getWsDataUser().getAvg_rate()!=null)
+            {
+                usuario.setAvg_rate(wsResponseLogin.getWsDataUser().getAvg_rate());
+            }
+
+
+            Helper.saveUserAppPreference(getApplicationContext(),usuario);
+            next(MainActivity.class,null);
+        }
+
+
+
+
+
+
+
 
     @Override
     public void requestListSuccess(WsResponseRequestList wsResponseRequestList) {
@@ -265,6 +287,11 @@ public class LoginActivity extends BaseActivity implements UserView {
 
 
 
+
+    }
+
+    @Override
+    public void deleteLocalSuccess(String mensaje) {
 
     }
 

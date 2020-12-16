@@ -240,10 +240,36 @@ public class AgregarLocalActivity extends BaseActivity implements LocationListen
             public void onSingleClick(View v) {
                 switch (v.getId()) {
                     case R.id.ivContinue:
-                        if (!loading.isShowing()) {
-                            loading.show();
+
+
+                        if(etLocalName.getText().toString().equals(""))
+                        {
+                            Toast.makeText(getContext(), "Ingrese nombre de local", Toast.LENGTH_LONG).show();
                         }
-                        ADDLOCAL();
+                        else
+                        {
+                            if(etLocalAdress.getText().toString().equals(""))
+                            {
+                                Toast.makeText(getContext(), "Ingrese dirección de local", Toast.LENGTH_LONG).show();
+                            }
+                            else
+                            {
+                                if(longitude==null & latitude==null)
+                                {
+                                    Toast.makeText(getContext(), "Toque el mapa en un punto", Toast.LENGTH_LONG).show();
+                                }
+                                else
+                                {
+                                    if (!loading.isShowing()) {
+                                        loading.show();
+                                    }
+
+                                    ADDLOCAL();
+                                }
+                            }
+                        }
+
+
                         break;
                     case R.id.ivClose:
                         finish();
@@ -336,11 +362,25 @@ public class AgregarLocalActivity extends BaseActivity implements LocationListen
     @Override
     public void onConnected(@Nullable Bundle bundle) {
 
-        CameraPosition cameraPosition = new CameraPosition.Builder().
-                target(myLocation).//posicion actual
-                //   tilt(90).//angulo de inclinacion
-                        zoom(18).//zoom
-                build();
+        CameraPosition cameraPosition=null;
+
+        if(myLat==0.0 && myLng==0.0)
+        {
+            LatLng posiconN= new LatLng(-12.0567891,-77.039606);
+            cameraPosition = new CameraPosition.Builder().
+                    target(posiconN).//posicion actual
+                    //   tilt(90).//angulo de inclinacion
+                            zoom(18).//zoom
+                    build();
+        }
+        else
+        {
+            cameraPosition = new CameraPosition.Builder().
+                    target(myLocation).//posicion actual
+                    //   tilt(90).//angulo de inclinacion
+                            zoom(18).//zoom
+                    build();
+        }
 
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
@@ -478,6 +518,11 @@ public class AgregarLocalActivity extends BaseActivity implements LocationListen
 
     @Override
     public void recoveryPasswordSuccess(String mensaje) {
+
+    }
+
+    @Override
+    public void deleteLocalSuccess(String mensaje) {
 
     }
 

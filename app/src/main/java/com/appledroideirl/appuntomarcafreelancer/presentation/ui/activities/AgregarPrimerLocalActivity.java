@@ -38,6 +38,7 @@ import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.use
 import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.user.response.WsResponseServices;
 import com.appledroideirl.appuntomarcafreelancer.domain.model.Usuario;
 import com.appledroideirl.appuntomarcafreelancer.presentation.presenter.UserPresenter;
+import com.appledroideirl.appuntomarcafreelancer.presentation.ui.dialogfragment.NoEntryLoginDialog;
 import com.appledroideirl.appuntomarcafreelancer.presentation.utils.Constants;
 import com.appledroideirl.appuntomarcafreelancer.presentation.utils.Helper;
 import com.appledroideirl.appuntomarcafreelancer.presentation.utils.SingleClick;
@@ -239,10 +240,37 @@ public class AgregarPrimerLocalActivity extends BaseActivity implements Location
             public void onSingleClick(View v) {
                 switch (v.getId()) {
                     case R.id.ivContinue:
-                        if (!loading.isShowing()) {
-                            loading.show();
+
+                        if(etLocalName.getText().toString().equals(""))
+                        {
+                            Toast.makeText(getContext(), "Ingrese nombre de local", Toast.LENGTH_LONG).show();
                         }
-                        ADDUSER();
+                        else
+                        {
+                            if(etLocalAdress.getText().toString().equals(""))
+                            {
+                                Toast.makeText(getContext(), "Ingrese dirección de local", Toast.LENGTH_LONG).show();
+                            }
+                            else
+                            {
+                                if(longitude==null & latitude==null)
+                                {
+                                    Toast.makeText(getContext(), "Toque el mapa en un punto", Toast.LENGTH_LONG).show();
+                                }
+                                else
+                                {
+                                    if (!loading.isShowing()) {
+                                        loading.show();
+                                    }
+
+                                    ADDUSER();
+                                }
+                            }
+                        }
+
+
+
+
                         break;
                     case R.id.ivClose:
                         finish();
@@ -338,11 +366,27 @@ public class AgregarPrimerLocalActivity extends BaseActivity implements Location
     @Override
     public void onConnected(@Nullable Bundle bundle) {
 
-        CameraPosition cameraPosition = new CameraPosition.Builder().
-                target(myLocation).//posicion actual
-                //   tilt(90).//angulo de inclinacion
-                        zoom(18).//zoom
-                build();
+        CameraPosition cameraPosition=null;
+
+        if(myLat==0.0 && myLng==0.0)
+        {
+            LatLng posiconN= new LatLng(-12.0567891,-77.039606);
+            cameraPosition = new CameraPosition.Builder().
+                    target(posiconN).//posicion actual
+                    //   tilt(90).//angulo de inclinacion
+                            zoom(18).//zoom
+                    build();
+        }
+        else
+        {
+             cameraPosition = new CameraPosition.Builder().
+                    target(myLocation).//posicion actual
+                    //   tilt(90).//angulo de inclinacion
+                            zoom(18).//zoom
+                    build();
+        }
+
+
 
         mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
@@ -436,34 +480,63 @@ public class AgregarPrimerLocalActivity extends BaseActivity implements Location
 
     }
 
+    void showAlertNoEntry(String mensaje)
+    {
+
+        Bundle args = new Bundle();
+        args.putString("mensaje", mensaje);
+
+        NoEntryLoginDialog df = new NoEntryLoginDialog();
+        df.setArguments(args);
+        df.setCancelable(false);
+        df.show(getSupportFragmentManager(), "");
+
+    }
+
     @Override
     public void userAddedSuccess(WsResponseAgregarUsuario wsResponseAgregarUsuario) {
 
         if (loading.isShowing()) {
             loading.dismiss();
         }
-        SharedPreferences preferenciasssee = getApplicationContext().getSharedPreferences("FCM", Context.MODE_PRIVATE);
-        String holaaatoken = preferenciasssee.getString("tokenfcm", "");
-        usuario.setFcm(holaaatoken);
-        usuario.setPassword(CuentanosEresActivity.wsParameterAgregarUsuario.getPassword());
-        usuario.setLogged(true);
-        usuario.setId(Integer.parseInt(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getId()));
-        usuario.setFull_name(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getFull_name());
-        usuario.setMail(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getMail());
-        usuario.setAbout(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getAbout());
-        usuario.setPhoto(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getPhoto());
-        usuario.setType_user(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getType_user());
 
-        usuario.setType_user(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getType_user());
-        usuario.setId_type_document(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getId_type_document());
-        usuario.setDocument_number(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getDocument_number());
 
-        usuario.setCellphone(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getCellphone());
+        if(wsResponseAgregarUsuario.getStatus()==-2)
+        {
+            showAlertNoEntry(wsResponseAgregarUsuario.getMessage());
+        }
+        else
+        {
+            SharedPreferences preferenciasssee = getApplicationContext().getSharedPreferences("FCM", Context.MODE_PRIVATE);
+            String holaaatoken = preferenciasssee.getString("tokenfcm", "");
+            usuario.setFcm(holaaatoken);
+            usuario.setPassword(CuentanosEresActivity.wsParameterAgregarUsuario.getPassword());
+            usuario.setLogged(true);
+            usuario.setId(Integer.parseInt(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getId()));
+            usuario.setFull_name(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getFull_name());
+            usuario.setMail(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getMail());
+            usuario.setAbout(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getAbout());
+            usuario.setPhoto(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getPhoto());
+            usuario.setType_user(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getType_user());
 
-        Helper.saveUserAppPreference(getApplicationContext(), usuario);
+            usuario.setType_user(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getType_user());
+            usuario.setId_type_document(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getId_type_document());
+            usuario.setDocument_number(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getDocument_number());
 
-        Toast.makeText(getContext(), "Registro exitoso", Toast.LENGTH_LONG).show();
-        next(MainActivity.class, null);
+            usuario.setCellphone(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getCellphone());
+
+            if(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getAvg_rate()!=null)
+            {
+                usuario.setAvg_rate(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getAvg_rate());
+            }
+
+
+            Helper.saveUserAppPreference(getApplicationContext(), usuario);
+
+            Toast.makeText(getContext(), "Registro exitoso", Toast.LENGTH_LONG).show();
+            next(MainActivity.class, null);
+        }
+
 
     }
 
@@ -499,6 +572,11 @@ public class AgregarPrimerLocalActivity extends BaseActivity implements Location
 
     @Override
     public void recoveryPasswordSuccess(String mensaje) {
+
+    }
+
+    @Override
+    public void deleteLocalSuccess(String mensaje) {
 
     }
 

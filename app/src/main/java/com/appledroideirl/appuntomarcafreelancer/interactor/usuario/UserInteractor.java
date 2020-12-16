@@ -97,5 +97,10 @@ public class UserInteractor {
         userRepository.recoveryPassword(token, wsParameterRecoveryPassword, recoveryPasswordCallback);
     }
 
+    public void deleteLocal(String token, int idLocal, DeleteLocalCallback deleteLocalCallback) {
+        userRepository.deleteLocal(token, idLocal, deleteLocalCallback);
+    }
+
+
 
 }

@@ -87,7 +87,14 @@ public class MiCuentaBancariaActivity extends BaseActivity implements UserView {
         SeteaSpinner(spiBanks, getApplicationContext());
         loading = new TransparentProgressDialog(getContext());
 
-        loadPresenter();
+        if(Helper.isConnectedToInternet(getContext()))
+        {
+            loadPresenter();
+        }
+        else
+        {
+            Toast.makeText(getContext(), "No tienes Internet", Toast.LENGTH_LONG).show();
+        }
 
 
         ivClose.setOnClickListener(new View.OnClickListener() {
@@ -283,6 +290,11 @@ public class MiCuentaBancariaActivity extends BaseActivity implements UserView {
 
     @Override
     public void recoveryPasswordSuccess(String mensaje) {
+
+    }
+
+    @Override
+    public void deleteLocalSuccess(String mensaje) {
 
     }
 

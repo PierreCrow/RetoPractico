@@ -1,6 +1,7 @@
 package com.appledroideirl.appuntomarcafreelancer.presentation.ui.activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.InsetDrawable;
@@ -12,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -61,7 +63,7 @@ public class MisLocalesActivity extends BaseActivity implements LocalesListDataA
     TextView tvAgregarNueva;
 
 
-
+    WsResponseListLocales wsResponseListLocaless;
 
 
 
@@ -81,7 +83,14 @@ public class MisLocalesActivity extends BaseActivity implements LocalesListDataA
         setContentView(R.layout.appu_mis_locales);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         injectView();
-        loasPresenter();
+        if(Helper.isConnectedToInternet(getContext()))
+        {
+            loasPresenter();
+        }
+        else
+        {
+            Toast.makeText(getContext(), "No tienes Internet", Toast.LENGTH_LONG).show();
+        }
         initUi();
     }
 
@@ -142,8 +151,34 @@ public class MisLocalesActivity extends BaseActivity implements LocalesListDataA
     }
 
     @Override
-    public void onLocalesListDataAdapterClicked(View v, Integer position) {
+    public void onLocalesListDataAdapterClicked(View v, Integer position,boolean eliminar) {
 
+        if(eliminar)
+        {
+            showAlert(wsResponseListLocaless.getWsDataLocales().get(position).getFull_name(),position);
+        }
+
+    }
+
+    void showAlert(String nombreLocal,int posicion) {
+        new AlertDialog.Builder(getContext(), R.style.AlertDialogCustom)
+                .setTitle("Eliminar dirección")
+                .setMessage("¿Esta seguro que desea eliminar la dirección : " + nombreLocal + "?")
+
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (!loading.isShowing()) {
+                            loading.show();
+                        }
+
+                        userPresenter.deleteLocal(Helper.getUserAppPreference(getContext()).getToken(),wsResponseListLocaless.getWsDataLocales().get(posicion).getId());
+                    }
+                })
+
+                // A null listener allows the button to dismiss the dialog and take no further action.
+                .setNegativeButton(android.R.string.no, null)
+                //  .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
     @Override
@@ -233,6 +268,8 @@ public class MisLocalesActivity extends BaseActivity implements LocalesListDataA
             loading.dismiss();
         }
 
+        wsResponseListLocaless=wsResponseListLocales;
+
         adapter = new LocalesListDataAdapter(mlistener, getContext(), wsResponseListLocales.getWsDataLocales());
         rvLocales.setHasFixedSize(true);
         rvLocales.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
@@ -262,6 +299,16 @@ public class MisLocalesActivity extends BaseActivity implements LocalesListDataA
 
     @Override
     public void recoveryPasswordSuccess(String mensaje) {
+
+    }
+
+    @Override
+    public void deleteLocalSuccess(String mensaje) {
+
+        userPresenter.listLocales(Helper.getUserAppPreference(getContext()).getToken(),Helper.getUserAppPreference(getContext()).getId());
+
+
+        Toast.makeText(getContext(), mensaje, Toast.LENGTH_LONG).show();
 
     }
 

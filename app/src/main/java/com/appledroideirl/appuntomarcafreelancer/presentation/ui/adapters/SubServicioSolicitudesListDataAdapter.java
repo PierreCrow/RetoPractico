@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.appledroideirl.appuntomarcafreelancer.R;
 import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.user.response.WsDataSale;
 import com.appledroideirl.appuntomarcafreelancer.domain.model.Solicitud;
+import com.appledroideirl.appuntomarcafreelancer.presentation.utils.Helper;
 
 import java.util.List;
 
@@ -45,7 +46,9 @@ public class SubServicioSolicitudesListDataAdapter extends
     public void onBindViewHolder(SingleItemRowHolder holder, int i) {
         WsDataSale subServicio = itemsList.get(i);
         holder.tvName.setText(subServicio.getFull_name());
-        holder.tvHowMuch.setText("S/"+subServicio.getAmount().toString());
+        String amountFinal= Helper.convertTwoDecimals(subServicio.getAmount());
+
+        holder.tvHowMuch.setText("S/"+amountFinal);
     }
 
 
