@@ -23,7 +23,7 @@ android {
         targetSdkVersion 29
         versionName '1.1.0'
         multiDexEnabled = true
-        versionCode 15
+        versionCode 20
         vectorDrawables.useSupportLibrary = true
     }
 
@@ -162,6 +162,8 @@ dependencies {
     //  implementation 'com.vincan:medialoader:1.0.0'
     //   implementation 'com.danikula:videocache:2.7.0'
     //   exclude group: 'com.android.support', module: 'support-v4'Sp
+
+    implementation 'com.github.francescopedronomnys:Sectioned-RecyclerView:0.2.2-mod'
 
 }
 

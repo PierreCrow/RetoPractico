@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.appledroideirl.appuntomarcafreelancer.R;
 import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.user.response.WsDataRequest;
+import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.user.response.WsDataSale;
 import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.user.response.WsResponseAcceptRequest;
 import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.user.response.WsResponseAddBankAccount;
 import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.user.response.WsResponseAddSubService;
@@ -40,6 +41,8 @@ import com.appledroideirl.appuntomarcafreelancer.presentation.utils.TransparentP
 import com.appledroideirl.appuntomarcafreelancer.presentation.view.UserView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -57,15 +60,29 @@ public class PedidosFragment extends BaseFragment
     @BindView(R.id.rv_pedidos_aprobados)
     RecyclerView rv_pedidos_aprobados;
 
+    @BindView(R.id.rv_pedidos_rechazados)
+    RecyclerView rv_pedidos_rechazados;
+
+    @BindView(R.id.rv_pedidos_pagados)
+    RecyclerView rv_pedidos_pagados;
+
     @BindView(R.id.tvPedidosAprobados)
     TextView tvPedidosAprobados;
 
     @BindView(R.id.tvPedidosPendientes)
     TextView tvPedidosPendientes;
 
+    @BindView(R.id.tvPedidosRechazados)
+    TextView tvPedidosRechazados;
+
+    @BindView(R.id.tvPedidosPagados)
+    TextView tvPedidosPagados;
+
 
     PedidosListDataAdapter adapterAprobados;
     PedidosListDataAdapter adapterPendientes;
+    PedidosListDataAdapter adapterRechazados;
+    PedidosListDataAdapter adapterPagados;
     PedidosListDataAdapter.OnPedidosListDataAdapterClickListener mlistener;
 
     List<Pedido> pedidosAprobados;
@@ -74,11 +91,16 @@ public class PedidosFragment extends BaseFragment
 
     List<WsDataRequest> requestsAcepted;
     List<WsDataRequest> requestsPending;
+    List<WsDataRequest> requestsRechazados;
+    List<WsDataRequest> requestsPagados;
 
     UserPresenter userPresenter;
     TransparentProgressDialog loading;
 
     public static String mensajeAceptarDenegar = "";
+
+
+    LinearLayoutManager linearLayoutManager,linearLayoutManager1,linearLayoutManager3,linearLayoutManager4;
 
     @Nullable
     @Override
@@ -112,8 +134,11 @@ public class PedidosFragment extends BaseFragment
 
     void showRequest() {
 
+
         requestsAcepted = new ArrayList<>();
         requestsPending = new ArrayList<>();
+        requestsRechazados = new ArrayList<>();
+        requestsPagados = new ArrayList<>();
 
         for (WsDataRequest wsDataRequest : requests) {
             if (wsDataRequest.getStatus_sale() == Constants.SOLICITUD_TYPES.ACEPTADO_POR_USUARIO) {
@@ -121,28 +146,86 @@ public class PedidosFragment extends BaseFragment
             } else {
                 if (wsDataRequest.getStatus_sale() == Constants.SOLICITUD_TYPES.PENDIENTE) {
                     requestsPending.add(wsDataRequest);
+                } else {
+                    if (wsDataRequest.getStatus_sale() == Constants.SOLICITUD_TYPES.RECHAZADO_POR_USUARIO) {
+                        requestsRechazados.add(wsDataRequest);
+                    } else {
+                        if (wsDataRequest.getStatus_sale() == Constants.SOLICITUD_TYPES.PAGADO_POR_CLIENTE) {
+                            requestsPagados.add(wsDataRequest);
+                        }
+                    }
                 }
             }
         }
 
         adapterAprobados = new PedidosListDataAdapter(mlistener, getContext(), requestsAcepted);
         adapterPendientes = new PedidosListDataAdapter(mlistener, getContext(), requestsPending);
+        adapterRechazados = new PedidosListDataAdapter(mlistener, getContext(), requestsRechazados);
+        adapterPagados = new PedidosListDataAdapter(mlistener, getContext(), requestsPagados);
 
-        if(requestsAcepted.size()>0)
-        {
+        if (requestsAcepted.size() > 0) {
             tvPedidosAprobados.setVisibility(View.VISIBLE);
         }
 
-        if(requestsPending.size()>0)
-        {
+        if (requestsPending.size() > 0) {
             tvPedidosPendientes.setVisibility(View.VISIBLE);
         }
 
-        rv_pedidos_pendientes.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        rv_pedidos_pendientes.setAdapter(adapterPendientes);
+        if (requestsRechazados.size() > 0) {
+            tvPedidosRechazados.setVisibility(View.VISIBLE);
+        }
 
-        rv_pedidos_aprobados.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        if (requestsPagados.size() > 0) {
+            tvPedidosPagados.setVisibility(View.VISIBLE);
+        }
+
+        linearLayoutManager = new LinearLayoutManager(getContext()) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+
+
+        linearLayoutManager1 = new LinearLayoutManager(getContext()) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+
+        linearLayoutManager3 = new LinearLayoutManager(getContext()) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+
+        linearLayoutManager4 = new LinearLayoutManager(getContext()) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+
+
+        rv_pedidos_pendientes.setLayoutManager(linearLayoutManager);
+        rv_pedidos_pendientes.setAdapter(adapterPendientes);
+        rv_pedidos_pendientes.setHasFixedSize(true);
+
+        rv_pedidos_aprobados.setLayoutManager(linearLayoutManager1);
         rv_pedidos_aprobados.setAdapter(adapterAprobados);
+        rv_pedidos_aprobados.setHasFixedSize(true);
+
+        rv_pedidos_rechazados.setLayoutManager(linearLayoutManager3);
+        rv_pedidos_rechazados.setAdapter(adapterRechazados);
+        rv_pedidos_rechazados.setHasFixedSize(true);
+
+        rv_pedidos_pagados.setLayoutManager(linearLayoutManager4);
+        rv_pedidos_pagados.setAdapter(adapterPagados);
+        rv_pedidos_pagados.setHasFixedSize(true);
+
+
 
     }
 

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.appledroideirl.appuntomarcafreelancer.R;
 import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.user.response.WsDataRequest;
+import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.user.response.WsDataSale;
 import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.user.response.WsResponseAcceptRequest;
 import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.user.response.WsResponseAddBankAccount;
 import com.appledroideirl.appuntomarcafreelancer.data.datasource.cloud.model.user.response.WsResponseAddSubService;
@@ -39,6 +41,8 @@ import com.appledroideirl.appuntomarcafreelancer.presentation.utils.TransparentP
 import com.appledroideirl.appuntomarcafreelancer.presentation.view.UserView;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import butterknife.BindView;
@@ -55,15 +59,29 @@ public class PedidosActivity extends BaseActivity
     @BindView(R.id.rv_pedidos_aprobados)
     RecyclerView rv_pedidos_aprobados;
 
+    @BindView(R.id.rv_pedidos_rechazados)
+    RecyclerView rv_pedidos_rechazados;
+
+    @BindView(R.id.rv_pedidos_pagados)
+    RecyclerView rv_pedidos_pagados;
+
     @BindView(R.id.tvPedidosAprobados)
     TextView tvPedidosAprobados;
 
     @BindView(R.id.tvPedidosPendientes)
     TextView tvPedidosPendientes;
 
+    @BindView(R.id.tvPedidosRechazados)
+    TextView tvPedidosRechazados;
+
+    @BindView(R.id.tvPedidosPagados)
+    TextView tvPedidosPagados;
+
 
     PedidosListDataAdapter adapterAprobados;
     PedidosListDataAdapter adapterPendientes;
+    PedidosListDataAdapter adapterRechazados;
+    PedidosListDataAdapter adapterPagados;
     PedidosListDataAdapter.OnPedidosListDataAdapterClickListener mlistener;
 
     List<Pedido> pedidosAprobados;
@@ -72,11 +90,34 @@ public class PedidosActivity extends BaseActivity
 
     List<WsDataRequest> requestsAcepted;
     List<WsDataRequest> requestsPending;
+    List<WsDataRequest> requestsRechazados;
+    List<WsDataRequest> requestsPagados;
 
     UserPresenter userPresenter;
     TransparentProgressDialog loading;
 
     String mensajeAceptarDenegar = "";
+
+
+    LinearLayoutManager linearLayoutManager,linearLayoutManager1,linearLayoutManager3,linearLayoutManager4;
+
+    public class CustomGridLayoutManager extends LinearLayoutManager {
+        private boolean isScrollEnabled = true;
+
+        public CustomGridLayoutManager(Context context) {
+            super(context);
+        }
+
+        public void setScrollEnabled(boolean flag) {
+            this.isScrollEnabled = flag;
+        }
+
+        @Override
+        public boolean canScrollVertically() {
+            //Similarly you can customize "canScrollHorizontally()" for managing horizontal scroll
+            return isScrollEnabled && super.canScrollVertically();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,12 +127,9 @@ public class PedidosActivity extends BaseActivity
         injectView();
         initUi();
 
-        if(Helper.isConnectedToInternet(getContext()))
-        {
+        if (Helper.isConnectedToInternet(getContext())) {
             loadPresenter();
-        }
-        else
-        {
+        } else {
             Toast.makeText(getContext(), "No tienes Internet", Toast.LENGTH_LONG).show();
         }
     }
@@ -112,6 +150,8 @@ public class PedidosActivity extends BaseActivity
 
         requestsAcepted = new ArrayList<>();
         requestsPending = new ArrayList<>();
+        requestsRechazados = new ArrayList<>();
+        requestsPagados = new ArrayList<>();
 
         for (WsDataRequest wsDataRequest : requests) {
             if (wsDataRequest.getStatus_sale() == Constants.SOLICITUD_TYPES.ACEPTADO_POR_USUARIO) {
@@ -119,12 +159,24 @@ public class PedidosActivity extends BaseActivity
             } else {
                 if (wsDataRequest.getStatus_sale() == Constants.SOLICITUD_TYPES.PENDIENTE) {
                     requestsPending.add(wsDataRequest);
+                } else {
+                    if (wsDataRequest.getStatus_sale() == Constants.SOLICITUD_TYPES.RECHAZADO_POR_USUARIO) {
+                        requestsRechazados.add(wsDataRequest);
+                    } else {
+                        if (wsDataRequest.getStatus_sale() == Constants.SOLICITUD_TYPES.PAGADO_POR_CLIENTE) {
+                            requestsPagados.add(wsDataRequest);
+                        }
+                    }
                 }
             }
         }
 
+
+        //    adapterAprobados = new PedidosListDataAdapter(mlistener, getApplicationContext(), listaFinal);
         adapterAprobados = new PedidosListDataAdapter(mlistener, getApplicationContext(), requestsAcepted);
         adapterPendientes = new PedidosListDataAdapter(mlistener, getApplicationContext(), requestsPending);
+        adapterRechazados = new PedidosListDataAdapter(mlistener, getApplicationContext(), requestsRechazados);
+        adapterPagados = new PedidosListDataAdapter(mlistener, getApplicationContext(), requestsPagados);
 
         if (requestsAcepted.size() > 0) {
             tvPedidosAprobados.setVisibility(View.VISIBLE);
@@ -134,12 +186,59 @@ public class PedidosActivity extends BaseActivity
             tvPedidosPendientes.setVisibility(View.VISIBLE);
         }
 
+        if (requestsRechazados.size() > 0) {
+            tvPedidosRechazados.setVisibility(View.VISIBLE);
+        }
 
-        rv_pedidos_pendientes.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+        if (requestsPagados.size() > 0) {
+            tvPedidosPagados.setVisibility(View.VISIBLE);
+        }
+
+        linearLayoutManager = new LinearLayoutManager(getApplicationContext()) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+
+
+        linearLayoutManager1 = new LinearLayoutManager(getApplicationContext()) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+
+        linearLayoutManager3 = new LinearLayoutManager(getApplicationContext()) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+
+        linearLayoutManager4 = new LinearLayoutManager(getApplicationContext()) {
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+
+
+        rv_pedidos_pendientes.setLayoutManager(linearLayoutManager);
         rv_pedidos_pendientes.setAdapter(adapterPendientes);
+        rv_pedidos_pendientes.setHasFixedSize(true);
 
-        rv_pedidos_aprobados.setLayoutManager(new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false));
+        rv_pedidos_aprobados.setLayoutManager(linearLayoutManager1);
         rv_pedidos_aprobados.setAdapter(adapterAprobados);
+        rv_pedidos_aprobados.setHasFixedSize(true);
+
+        rv_pedidos_rechazados.setLayoutManager(linearLayoutManager3);
+        rv_pedidos_rechazados.setAdapter(adapterRechazados);
+        rv_pedidos_rechazados.setHasFixedSize(true);
+
+        rv_pedidos_pagados.setLayoutManager(linearLayoutManager4);
+        rv_pedidos_pagados.setAdapter(adapterPagados);
+        rv_pedidos_pagados.setHasFixedSize(true);
 
     }
 
@@ -210,7 +309,7 @@ public class PedidosActivity extends BaseActivity
 
 
     @Override
-    public void onPedidosListDataAdapterClicked(View v, Integer position, String action,WsDataRequest wsDataRequest) {
+    public void onPedidosListDataAdapterClicked(View v, Integer position, String action, WsDataRequest wsDataRequest) {
 
 
         Integer idRequest = wsDataRequest.getId();
@@ -236,13 +335,10 @@ public class PedidosActivity extends BaseActivity
 
         requests = wsResponseRequestList.getWsDataRequests();
 
-        if(requests.size()==0)
-        {
+        if (requests.size() == 0) {
             Toast.makeText(getContext(), "No tiene pedidos", Toast.LENGTH_SHORT).show();
         }
         showRequest();
-
-
 
 
         if (loading.isShowing()) {

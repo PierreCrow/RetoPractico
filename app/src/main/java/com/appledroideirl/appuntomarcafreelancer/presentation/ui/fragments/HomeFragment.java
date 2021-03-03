@@ -1,5 +1,13 @@
 package com.appledroideirl.appuntomarcafreelancer.presentation.ui.fragments;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +18,8 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,6 +45,7 @@ import com.appledroideirl.appuntomarcafreelancer.domain.model.Service;
 import com.appledroideirl.appuntomarcafreelancer.domain.model.SubService;
 import com.appledroideirl.appuntomarcafreelancer.domain.model.Usuario;
 import com.appledroideirl.appuntomarcafreelancer.presentation.presenter.UserPresenter;
+import com.appledroideirl.appuntomarcafreelancer.presentation.ui.activities.MainActivity;
 import com.appledroideirl.appuntomarcafreelancer.presentation.ui.activities.PedidosActivity;
 import com.appledroideirl.appuntomarcafreelancer.presentation.ui.activities.TuDisponibilidadActivity;
 import com.appledroideirl.appuntomarcafreelancer.presentation.ui.adapters.ServiciosHomeListDataAdapter;
@@ -169,6 +180,8 @@ public class HomeFragment extends BaseFragment
 
         return x;
     }
+
+
 
     void loadPresenter() {
         userPresenter = new UserPresenter();

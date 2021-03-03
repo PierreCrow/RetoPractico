@@ -3,8 +3,7 @@ package com.appledroideirl.appuntomarcafreelancer.presentation.utils;
 public class Constants {
 
     public class URLS {
-       public static final String URL_BASE = "https://developer-dot-app-puntos-285220.uc.r.appspot.com/";
-
+        public static final String URL_BASE = "https://developer-dot-app-puntos-285220.uc.r.appspot.com/";
         public static final String GENERATE_TOKEN = "token";
         public static final String LOGIN = "login";
         public static final String REQUEST_LIST_USER = "saleuser/";
@@ -19,19 +18,21 @@ public class Constants {
         public static final String ADD_USER = "users";
         public static final String ADD_BANK_ACCOUNT = "userbankaccount";
         public static final String LIST_BANK_ACCOUNT = "userbankaccount/";
-
         public static final String ADD_SUB_SERVICE = "usersubserviceadd";
         public static final String LIST_LOCALES = "userstore/";
         public static final String ADD_LOCAL = "userstore";
         public static final String RECOVERY_PASSWORD = "recoveruser";
     }
 
+    public static class PDF_URL {
+        public static final String Terminons_Partners = "https://storage.googleapis.com/app-puntos-285220.appspot.com/mobile/Appunto%20-%20Te%CC%81rminos%20y%20Condiciones-partners.pdf";
+        public static final String PoliticasPrivacidad = "https://storage.googleapis.com/app-puntos-285220.appspot.com/mobile/Appunto%20-%20Poli%CC%81tica%20de%20Privacidad-customers.pdf";
+    }
 
     public static class STORE {
         public static final int CLOUD = 0;
         public static final int DB = 1;
     }
-
 
 
     public static class REQUEST_CODES {
@@ -115,6 +116,7 @@ public class Constants {
         public static final int ACEPTADO_POR_USUARIO = 1;
         public static final int RECHAZADO_POR_USUARIO = 2;
         public static final int PAGADO_POR_CLIENTE = 3;
+        public static final int CANCELADO = 4;
     }
 
     public class IMAGE_EXTENSION {

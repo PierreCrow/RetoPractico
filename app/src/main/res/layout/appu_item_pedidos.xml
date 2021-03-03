@@ -12,8 +12,35 @@
     android:layout_marginRight="10dp">
 
 
+    <LinearLayout
+        android:id="@+id/llTitulo"
+        android:layout_gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="10dp"
+        android:visibility="gone">
+
+        <TextView
+            android:gravity="left"
+            android:id="@+id/tvNombreTitulo"
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Servicio"
+            android:fontFamily="@font/gothammedium"
+            android:textSize="16sp"
+            android:textColor="@color/tittle_item_reportes"/>
+
+
+    </LinearLayout>
+
 
     <LinearLayout
+        android:id="@+id/llData"
         android:layout_gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,9 +54,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center|left">
+            android:gravity="">
 
             <TextView
+                android:gravity="left"
                 android:id="@+id/tvNameServicio"
                 android:layout_marginLeft="5dp"
                 android:layout_width="wrap_content"
@@ -37,6 +65,18 @@
                 android:text="Servicio"
                 android:fontFamily="@font/gothammedium"
                 android:textSize="16sp"
+                android:textColor="@color/tittle_item_reportes"/>
+
+            <TextView
+                android:gravity="right"
+                android:id="@+id/tvTipo"
+                android:layout_marginLeft="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Servicio"
+                android:fontFamily="@font/gothammedium"
+                android:textSize="13sp"
+                android:visibility="gone"
                 android:textColor="@color/tittle_item_reportes"/>
 
 
@@ -95,13 +135,22 @@
 
 
 
-            <ImageView
-                android:layout_centerInParent="true"
-                android:layout_alignParentRight="true"
+            <LinearLayout
                 android:id="@+id/ivBotonVer"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/appu_go_down_black"/>
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_centerInParent="true"
+                android:layout_alignParentRight="true">
+
+                <ImageView
+                    android:id="@+id/ivBotonVerr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/appu_go_down_black"/>
+
+            </LinearLayout>
+
+
 
 
 
@@ -113,6 +162,8 @@
 
 
     </LinearLayout>
+
+
     <LinearLayout
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"
@@ -131,6 +182,46 @@
         </androidx.recyclerview.widget.RecyclerView>
 
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:fontFamily="@font/gothambold"
+                    android:lineSpacingExtra="5dp"
+                    android:text="Cupón"
+                    android:textColor="@color/item_servicios_freelancer"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/tvCupon"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/gothambold"
+                android:lineSpacingExtra="5dp"
+                android:text="1"
+                android:textColor="@color/item_servicios_freelancer"
+                android:textSize="14sp" />
+
+
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -276,8 +367,50 @@
 
 
 
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="0dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+
+                <TextView
+                    android:id="@+id/tvPosicion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gothambold"
+                    android:lineSpacingExtra="5dp"
+                    android:text="Posición:"
+                    android:textColor="@color/item_servicios_freelancer"
+                    android:textSize="14sp" />
+                <TextView
+                    android:id="@+id/tvCoordenadas"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/gothambook"
+                    android:lineSpacingExtra="5dp"
+                    android:text=""
+                    android:textColor="@color/item_servicios_freelancer"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+
 
         </RelativeLayout>
+
+
+
+
 
         <RelativeLayout
             android:layout_width="match_parent"

@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -41,7 +42,7 @@ public class PedidosListDataAdapter extends RecyclerView.Adapter<PedidosListData
     }
 
     public interface OnPedidosListDataAdapterClickListener {
-        void onPedidosListDataAdapterClicked(View v, Integer position, String Action,WsDataRequest wsDataRequest);
+        void onPedidosListDataAdapterClicked(View v, Integer position, String Action, WsDataRequest wsDataRequest);
     }
 
     @Override
@@ -55,46 +56,95 @@ public class PedidosListDataAdapter extends RecyclerView.Adapter<PedidosListData
     public void onBindViewHolder(SingleItemRowHolder holder, int i) {
         WsDataRequest pedido = itemsList.get(i);
 
-        holder.tvSolitudClient.setText("Solicitado por " + pedido.getFull_name_customer());
+        if (pedido.getTotal_amount() == 98765.43) {
 
-        if(!pedido.getUrl_image_customer().equals(""))
-        {
-            Helper.urlToImageView(pedido.getUrl_image_customer(), holder.ivClientPicture, mContext);
+            holder.tvNombreTitulo.setTextColor(ContextCompat.getColor(mContext, R.color.labelColor));
+
+            holder.tvNombreTitulo.setText(pedido.getComment());
+
+            holder.llData.setVisibility(View.GONE);
+            holder.llTitulo.setVisibility(View.VISIBLE);
+        } else {
+
+            holder.tvNombreTitulo.setTextColor(ContextCompat.getColor(mContext, R.color.tittle_item_reportes));
+
+            holder.llData.setVisibility(View.VISIBLE);
+            holder.llTitulo.setVisibility(View.GONE);
+
+            holder.tvSolitudClient.setText("Solicitado por " + pedido.getFull_name_customer());
+
+            if (!pedido.getUrl_image_customer().equals("")) {
+                Helper.urlToImageView(pedido.getUrl_image_customer(), holder.ivClientPicture, mContext);
+            }
+            else
+            {
+                Helper.urlToImageView("https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/default-avatar.png", holder.ivClientPicture, mContext);
+            }
+
+
+            holder.tvFecha.setText(pedido.getDate_availability());
+            holder.tvNameServicio.setText("Servicio " + "");
+
+            Integer horaaa = pedido.getHour_availability();
+            holder.tvHora.setText(horaaa.toString() + ":00");
+
+            String amountFinal = Helper.convertTwoDecimals(pedido.getTotal_amount());
+
+            String amountCupon=Helper.convertTwoDecimals(pedido.getCuponAmount());
+
+            holder.tvCupon.setText("S/" + amountCupon);
+            holder.tvTotal.setText("S/" + amountFinal);
+
+            holder.tvComment.setText(pedido.getComment());
+
+            adapter = new SubServicioSolicitudesListDataAdapter(mContext, pedido.getWsDataSales());
+            //  holder.rvUserservicios.setHasFixedSize(true);
+            holder.rvUserservicios.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+            holder.rvUserservicios.setAdapter(adapter);
+
+            if (pedido.getStatus_sale() == Constants.SOLICITUD_TYPES.ACEPTADO_POR_USUARIO) {
+                holder.llBotones.setVisibility(View.GONE);
+                holder.ivBotonCheck.setVisibility(View.VISIBLE);
+                holder.tvTipo.setText("Aceptado");
+            } else {
+                holder.llBotones.setVisibility(View.VISIBLE);
+                holder.ivBotonCheck.setVisibility(View.GONE);
+            }
+
+            if (pedido.getStatus_sale() == Constants.SOLICITUD_TYPES.PENDIENTE) {
+                holder.tvTipo.setText("Pendiente");
+            }
+
+            if (pedido.getStatus_sale() == Constants.SOLICITUD_TYPES.RECHAZADO_POR_USUARIO) {
+                holder.tvTipo.setText("Rechazado");
+                holder.llBotones.setVisibility(View.GONE);
+            }
+
+            if (pedido.getStatus_sale() == Constants.SOLICITUD_TYPES.PAGADO_POR_CLIENTE) {
+                holder.tvTipo.setText("Pagado");
+                holder.llBotones.setVisibility(View.GONE);
+            }
+
+            if (pedido.getStatus_sale() == Constants.SOLICITUD_TYPES.CANCELADO) {
+                holder.tvTipo.setText("Cancelado");
+                holder.llBotones.setVisibility(View.GONE);
+            }
+
+            holder.tvLugar.setText(pedido.getAddress());
+
+            if (pedido.getLat() != null && pedido.getLng() != null) {
+                String coordd = pedido.getLat() + " , " + pedido.getLng();
+                holder.tvCoordenadas.setText(coordd);
+            }
+
+            if (pedido.getId_type_availability() == 2) {
+                holder.tvLugar.setVisibility(View.GONE);
+                holder.tvTituloLugar.setVisibility(View.GONE);
+
+                holder.tvCoordenadas.setVisibility(View.GONE);
+                holder.tvPosicion.setVisibility(View.GONE);
+            }
         }
-
-
-
-        holder.tvFecha.setText(pedido.getDate_availability());
-        holder.tvNameServicio.setText("Servicio " + "");
-
-        Integer horaaa = pedido.getHour_availability();
-        holder.tvHora.setText(horaaa.toString() + ":00");
-
-        String amountFinal= Helper.convertTwoDecimals(pedido.getTotal_amount());
-
-        holder.tvTotal.setText("S/" + amountFinal);
-
-        holder.tvComment.setText(pedido.getComment());
-
-        adapter = new SubServicioSolicitudesListDataAdapter(mContext, pedido.getWsDataSales());
-        //  holder.rvUserservicios.setHasFixedSize(true);
-        holder.rvUserservicios.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
-        holder.rvUserservicios.setAdapter(adapter);
-
-        if (pedido.getStatus_sale() == Constants.SOLICITUD_TYPES.ACEPTADO_POR_USUARIO) {
-            holder.llBotones.setVisibility(View.GONE);
-            holder.ivBotonCheck.setVisibility(View.VISIBLE);
-        }
-
-        holder.tvLugar.setText(pedido.getAddress());
-
-        if(pedido.getId_type_availability()==2)
-        {
-            holder.tvLugar.setVisibility(View.GONE);
-            holder.tvTituloLugar.setVisibility(View.GONE);
-        }
-
-
 
 
     }
@@ -108,16 +158,17 @@ public class PedidosListDataAdapter extends RecyclerView.Adapter<PedidosListData
     public class SingleItemRowHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
 
-        protected LinearLayout llAEsconder;
-        protected ImageView ivBotonVer,ivBotonCheck;
+        protected LinearLayout llAEsconder, llTitulo, llData;
+        protected LinearLayout ivBotonVer;
+        protected ImageView  ivBotonCheck,ivBotonVerr;
         protected TextView tvSolitudClient;
-        protected TextView tvTotal,tvComment;
+        protected TextView tvTotal, tvComment;
         protected TextView tvHora;
-        protected TextView tvFecha;
-        protected TextView tvLugar,tvTituloLugar;
+        protected TextView tvFecha, tvTipo;
+        protected TextView tvLugar, tvTituloLugar;
         protected RecyclerView rvUserservicios;
         protected ImageView ivClientPicture;
-        protected TextView tvNameServicio;
+        protected TextView tvNameServicio, tvNombreTitulo, tvPosicion, tvCoordenadas,tvCupon;
 
         protected Button btnAceptar;
         protected Button btnDenegar;
@@ -133,14 +184,22 @@ public class PedidosListDataAdapter extends RecyclerView.Adapter<PedidosListData
             this.tvNameServicio = (TextView) view.findViewById(R.id.tvNameServicio);
             this.tvComment = (TextView) view.findViewById(R.id.tvComment);
             this.llAEsconder = (LinearLayout) view.findViewById(R.id.llAEsconder);
-            this.ivBotonVer = (ImageView) view.findViewById(R.id.ivBotonVer);
+            this.ivBotonVer = (LinearLayout) view.findViewById(R.id.ivBotonVer);
             this.ivBotonCheck = (ImageView) view.findViewById(R.id.ivBotonCheck);
+            this.ivBotonVerr = (ImageView) view.findViewById(R.id.ivBotonVerr);
             this.rvUserservicios = (RecyclerView) view.findViewById(R.id.rvUserservicios);
 
             this.tvTotal = (TextView) view.findViewById(R.id.tvTotal);
             this.tvHora = (TextView) view.findViewById(R.id.tvHora);
             this.tvFecha = (TextView) view.findViewById(R.id.tvFecha);
             this.tvLugar = (TextView) view.findViewById(R.id.tvLugar);
+
+            this.tvPosicion = (TextView) view.findViewById(R.id.tvPosicion);
+            this.tvCoordenadas = (TextView) view.findViewById(R.id.tvCoordenadas);
+
+            this.tvTipo = (TextView) view.findViewById(R.id.tvTipo);
+
+            this.tvCupon = (TextView) view.findViewById(R.id.tvCupon);
 
             this.tvTituloLugar = (TextView) view.findViewById(R.id.tvTituloLugar);
             this.ivClientPicture = (ImageView) view.findViewById(R.id.ivClientPicture);
@@ -149,6 +208,9 @@ public class PedidosListDataAdapter extends RecyclerView.Adapter<PedidosListData
             this.btnDenegar = (Button) view.findViewById(R.id.btnDenegar);
 
             this.llBotones = (LinearLayout) view.findViewById(R.id.llBotones);
+            this.llTitulo = (LinearLayout) view.findViewById(R.id.llTitulo);
+            this.llData = (LinearLayout) view.findViewById(R.id.llData);
+            this.tvNombreTitulo = (TextView) view.findViewById(R.id.tvNombreTitulo);
 
             ivBotonVer.setOnClickListener(this);
             btnAceptar.setOnClickListener(this);
@@ -159,21 +221,21 @@ public class PedidosListDataAdapter extends RecyclerView.Adapter<PedidosListData
         public void onClick(View view) {
 
             if (view == btnAceptar) {
-                mlistener.onPedidosListDataAdapterClicked(view, this.getPosition(), "ACEPT",itemsList.get(this.getPosition()));
+                mlistener.onPedidosListDataAdapterClicked(view, this.getPosition(), "ACEPT", itemsList.get(this.getPosition()));
             } else {
                 if (view == btnDenegar) {
-                    mlistener.onPedidosListDataAdapterClicked(view, this.getPosition(), "REFUSE",itemsList.get(this.getPosition()));
+                    mlistener.onPedidosListDataAdapterClicked(view, this.getPosition(), "REFUSE", itemsList.get(this.getPosition()));
                 } else {
 
                     if (view == ivBotonVer) {
                         Integer estadoLinear = llAEsconder.getVisibility();
                         if (estadoLinear == View.VISIBLE) {
                             llAEsconder.setVisibility(View.GONE);
-                            ivBotonVer.setImageResource(R.drawable.appu_go_down_black);
+                            ivBotonVerr.setImageResource(R.drawable.appu_go_down_black);
 
                         } else {
                             llAEsconder.setVisibility(View.VISIBLE);
-                            ivBotonVer.setImageResource(R.drawable.appu_ic_go_up);
+                            ivBotonVerr.setImageResource(R.drawable.appu_ic_go_up);
 
                         }
                     }

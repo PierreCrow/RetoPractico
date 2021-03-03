@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="Gradle: com.github.francescopedronomnys:Sectioned-RecyclerView:0.2.2-mod@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f26ca819cde5abfa97da58a56d201f81/jetified-Sectioned-RecyclerView-0.2.2-mod/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/f26ca819cde5abfa97da58a56d201f81/jetified-Sectioned-RecyclerView-0.2.2-mod/res" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.francescopedronomnys/Sectioned-RecyclerView/0.2.2-mod/bee0238f23b707fcc14f2720a514041251170395/Sectioned-RecyclerView-0.2.2-mod-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.github.francescopedronomnys/Sectioned-RecyclerView/0.2.2-mod/70b836ec035a3a8833b6f4063b2effbc167ba0ac/Sectioned-RecyclerView-0.2.2-mod-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

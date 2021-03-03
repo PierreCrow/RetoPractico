@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -113,6 +114,12 @@ public class CompletarDatosFreelancerActivity
     @BindView(R.id.tvSubirFoto)
     TextView tvSubirFoto;
 
+    @BindView(R.id.tvTerminos)
+    TextView tvTerminos;
+
+    @BindView(R.id.chxTerminos)
+    CheckBox chxTerminos;
+
     @BindView(R.id.spiTypeDocs)
     Spinner spiTypeDocs;
 
@@ -120,7 +127,7 @@ public class CompletarDatosFreelancerActivity
     TransparentProgressDialog loading;
 
     int typeDoc = 0;
-    String email, nombre, pass, repeatPass, docNumber, celPhone,about;
+    String email, nombre, pass, repeatPass, docNumber, celPhone, about;
     Timestamp created_at;
     FirebaseStorage storage;
     StorageReference storageReference;
@@ -130,7 +137,6 @@ public class CompletarDatosFreelancerActivity
     UserPresenter userPresenter;
 
     Usuario usuario;
-
 
 
     @Override
@@ -154,7 +160,7 @@ public class CompletarDatosFreelancerActivity
 
         created_at = new Timestamp(Calendar.getInstance().getTime());
         loading = new TransparentProgressDialog(getContext());
-        usuario= Helper.getUserAppPreference(getContext());
+        usuario = Helper.getUserAppPreference(getContext());
 
         SeteaSpinner(spiTypeDocs, getApplicationContext());
 
@@ -188,77 +194,86 @@ public class CompletarDatosFreelancerActivity
 
             }
         });
+
+
+        tvTerminos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String filename = Constants.PDF_URL.Terminons_Partners;
+                String urlFinal = "http://docs.google.com/gview?embedded=true&url=" + filename;
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(urlFinal));
+                startActivity(browserIntent);
+
+            }
+        });
+
+
     }
 
-    void loadPresenter()
-    {
-        userPresenter= new UserPresenter();
+    void loadPresenter() {
+        userPresenter = new UserPresenter();
         userPresenter.addView(this);
     }
 
     boolean validations() {
         boolean esCorrecto = false;
 
-        if (etEmail.getText().toString().equals("")) {
-            etEmail.setError("Ingrese correo");
-            etEmail.requestFocus();
-        } else {
-            if (etNames.getText().toString().equals("")) {
-                etNames.setError("Ingrese nombres");
-                etNames.requestFocus();
+        if (chxTerminos.isChecked()) {
+            if (etEmail.getText().toString().equals("")) {
+                etEmail.setError("Ingrese correo");
+                etEmail.requestFocus();
             } else {
-
-                if (etPass.getText().toString().equals("")) {
-                    etPass.setError("Ingrese contraseña");
-                    etPass.requestFocus();
+                if (etNames.getText().toString().equals("")) {
+                    etNames.setError("Ingrese nombres");
+                    etNames.requestFocus();
                 } else {
 
-                    if(etPass.getText().toString().length()<6)
-                    {
-                        etPass.setError("Mínimo 6 caracteres");
+                    if (etPass.getText().toString().equals("")) {
+                        etPass.setError("Ingrese contraseña");
                         etPass.requestFocus();
-                    }
-                    else
-                    {
-                        if (etRepeatPass.getText().toString().equals("")) {
-                            etRepeatPass.setError("Ingrese contraseña");
-                            etRepeatPass.requestFocus();
-                        } else {
-                            if (!etPass.getText().toString().equals(etRepeatPass.getText().toString())) {
-                                etNames.setError("Contraseña distinta");
-                                etRepeatPass.setError("Contraseña distinta");
-                                etPass.requestFocus();
-                            } else {
-                                if (etCellPhone.getText().toString().equals("")) {
-                                    etCellPhone.setError("Ingrese teléfono");
-                                    etCellPhone.requestFocus();
-                                } else {
-                                    if (spiTypeDocs.getSelectedItem().toString().equals("Tipo de documento")) {
-                                        Toast.makeText(getApplicationContext(), "Ingrese tipo de documento", Toast.LENGTH_SHORT).show();
-                                    } else {
-                                        if (etDocNumber.getText().toString().equals("")) {
-                                            etDocNumber.setError("Ingrese número de documento");
-                                            etDocNumber.requestFocus();
-                                        } else {
-                                            esCorrecto = true;
-                                        }
+                    } else {
 
+                        if (etPass.getText().toString().length() < 6) {
+                            etPass.setError("Mínimo 6 caracteres");
+                            etPass.requestFocus();
+                        } else {
+                            if (etRepeatPass.getText().toString().equals("")) {
+                                etRepeatPass.setError("Ingrese contraseña");
+                                etRepeatPass.requestFocus();
+                            } else {
+                                if (!etPass.getText().toString().equals(etRepeatPass.getText().toString())) {
+                                    etNames.setError("Contraseña distinta");
+                                    etRepeatPass.setError("Contraseña distinta");
+                                    etPass.requestFocus();
+                                } else {
+                                    if (etCellPhone.getText().toString().equals("")) {
+                                        etCellPhone.setError("Ingrese teléfono");
+                                        etCellPhone.requestFocus();
+                                    } else {
+                                        if (spiTypeDocs.getSelectedItem().toString().equals("Tipo de documento")) {
+                                            Toast.makeText(getApplicationContext(), "Ingrese tipo de documento", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            if (etDocNumber.getText().toString().equals("")) {
+                                                etDocNumber.setError("Ingrese número de documento");
+                                                etDocNumber.requestFocus();
+                                            } else {
+                                                esCorrecto = true;
+                                            }
+
+                                        }
                                     }
                                 }
-                            }
 
+                            }
                         }
                     }
-
-
-
-
-
                 }
-
-
             }
 
+
+        } else {
+            Toast.makeText(getContext(), "Acepte los términos y condiciones", Toast.LENGTH_LONG).show();
         }
 
 
@@ -271,8 +286,8 @@ public class CompletarDatosFreelancerActivity
         repeatPass = etRepeatPass.getText().toString();
         nombre = etNames.getText().toString();
         docNumber = etDocNumber.getText().toString();
-        celPhone = "51"+etCellPhone.getText().toString();
-        about=etAbout.getText().toString();
+        celPhone = "51" + etCellPhone.getText().toString();
+        about = etAbout.getText().toString();
 
         if (spiTypeDocs.getSelectedItem().toString().equals("DNI")) {
             typeDoc = 1;
@@ -296,7 +311,6 @@ public class CompletarDatosFreelancerActivity
         CuentanosEresActivity.wsParameterAgregarUsuario.setPhoto(url);
         CuentanosEresActivity.wsParameterAgregarUsuario.setAbout(about);
         CuentanosEresActivity.wsParameterAgregarUsuario.setId("");
-
 
 
         if (loading.isShowing()) {
@@ -445,9 +459,7 @@ public class CompletarDatosFreelancerActivity
                     e.printStackTrace();
                 }
                 photo = BitmapFactory.decodeStream(imageStream);
-            }
-            else
-            {
+            } else {
                 if (requestCode == 131196 || requestCode == Constants.REQUEST_CODES.REQUEST_CODE_STORAGE) {
                     final Uri imageUri = data.getData();
                     InputStream imageStream = null;
@@ -457,9 +469,7 @@ public class CompletarDatosFreelancerActivity
                         e.printStackTrace();
                     }
                     photo = BitmapFactory.decodeStream(imageStream);
-                }
-                else
-                {
+                } else {
                     if (requestCode == 197574 || requestCode == Constants.REQUEST_CODES.REQUEST_CODE_CAMERA) {
                         photo = (Bitmap) data.getExtras().get("data");
                     }
@@ -650,7 +660,7 @@ public class CompletarDatosFreelancerActivity
             loading.dismiss();
         }
         SharedPreferences preferenciasssee = getApplicationContext().getSharedPreferences("FCM", Context.MODE_PRIVATE);
-        String holaaatoken=preferenciasssee.getString("tokenfcm","");
+        String holaaatoken = preferenciasssee.getString("tokenfcm", "");
         usuario.setFcm(holaaatoken);
         usuario.setPassword(CuentanosEresActivity.wsParameterAgregarUsuario.getPassword());
         usuario.setLogged(true);
@@ -664,17 +674,15 @@ public class CompletarDatosFreelancerActivity
         usuario.setId_type_document(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getId_type_document());
         usuario.setDocument_number(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getDocument_number());
 
-        if(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getAvg_rate()!=null)
-        {
+        if (wsResponseAgregarUsuario.getWsDataAgregarUsuario().getAvg_rate() != null) {
             usuario.setAvg_rate(wsResponseAgregarUsuario.getWsDataAgregarUsuario().getAvg_rate());
         }
 
 
-
-        Helper.saveUserAppPreference(getApplicationContext(),usuario);
+        Helper.saveUserAppPreference(getApplicationContext(), usuario);
 
         Toast.makeText(getContext(), "Registro exitoso", Toast.LENGTH_LONG).show();
-        next(MainActivity.class,null);
+        next(MainActivity.class, null);
 
     }
 

@@ -92,9 +92,22 @@ public class WsDataRequest {
     @Expose
     private Double total_amount = null;
 
+    @SerializedName("amount_coupon")
+    @Expose
+    private Double cuponAmount = null;
+
     @SerializedName("type_sales")
     @Expose
     private List<WsDataSale> wsDataSales = null;
+
+
+    @SerializedName("customer_latitude")
+    @Expose
+    private String lat = null;
+
+    @SerializedName("customer_longitude")
+    @Expose
+    private String lng = null;
 
 
     public String getAddress() {
@@ -271,5 +284,29 @@ public class WsDataRequest {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getLat() {
+        return lat;
+    }
+
+    public void setLat(String lat) {
+        this.lat = lat;
+    }
+
+    public String getLng() {
+        return lng;
+    }
+
+    public void setLng(String lng) {
+        this.lng = lng;
+    }
+
+    public Double getCuponAmount() {
+        return cuponAmount;
+    }
+
+    public void setCuponAmount(Double cuponAmount) {
+        this.cuponAmount = cuponAmount;
     }
 }

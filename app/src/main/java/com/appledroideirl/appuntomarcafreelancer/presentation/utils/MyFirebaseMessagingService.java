@@ -66,6 +66,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     void addNotification() {
 
+
         int notifyID = 1;
         String CHANNEL_ID = "my_channel_01";// The id of the channel.
         CharSequence name = "channel_name";// The user-visible name of the channel.
@@ -78,10 +79,12 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.O_MR1) {
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                    //  .setSmallIcon(R.drawable.notification_icon)
+
                     .setContentTitle(titulo)
                     .setContentText(cuerpo)
                     .setContentIntent(pendingIntent)
+                    // .setSmallIcon(R.drawable.ic_launcher)
+                    .setSmallIcon(R.mipmap.avataro)
                     .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
             NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
@@ -112,7 +115,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     .setContentTitle(titulo)
                     .setContentText(cuerpo)
                     .setContentIntent(pendingIntent)
-                    .setSmallIcon(R.mipmap.logo_appunto)
+                    //  .setSmallIcon(R.drawable.ic_launcher)
+                    .setSmallIcon(R.mipmap.avataro)
                     //  .setLargeIcon(BitmapFactory.decodeResource(this.getResources(), R.mipmap.logo_appunto))
                     .setChannelId(CHANNEL_ID)
                     .build();
@@ -129,6 +133,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
     }
+
+
+
 
 
 }

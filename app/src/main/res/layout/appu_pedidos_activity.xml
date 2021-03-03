@@ -66,7 +66,7 @@
 
 
                     <TextView
-                        android:visibility="gone"
+
                         android:id="@+id/tvPedidosPendientes"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
 
 
                     <TextView
-                        android:visibility="gone"
+
                         android:id="@+id/tvPedidosAprobados"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -102,6 +102,53 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_pedidos_aprobados"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
+                        />
+
+
+
+                    <TextView
+
+                        android:id="@+id/tvPedidosRechazados"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="35dp"
+                        android:fontFamily="@font/gothambold"
+                        android:text="Pedidos rechazados"
+                        android:textColor="@color/labelColor"
+                        android:textSize="18dp" />
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_pedidos_rechazados"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="20dp"
+                        />
+
+
+                    <TextView
+
+                        android:id="@+id/tvPedidosPagados"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginTop="35dp"
+                        android:fontFamily="@font/gothambold"
+                        android:text="Pedidos completados"
+                        android:textColor="@color/labelColor"
+                        android:textSize="18dp" />
+
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_pedidos_pagados"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
